@@ -1,0 +1,18 @@
+#!/bin/sh
+
+kitty -c ~/.config/kitty/kitty.cmatrix.config -e cmatrix &
+# kitty -e cmatrix &
+sleep 0.2
+i3-msg fullscreen
+kitty -c ~/.config/kitty/kitty.cmatrix.config -e cmatrix &
+# kitty -e cmatrix &
+i3-msg move window to output right
+sleep 0.2
+
+i3-msg fullscreen
+
+i3lock -nt 
+i3-msg kill
+i3-msg focus output left
+i3-msg kill
+i3-msg focus output right

@@ -1,0 +1,167 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 24, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    // Choose the order of the modules
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/window", "custom/media"],
+    "modules-center": ["wlr/taskbar"],
+    "modules-right": ["pulseaudio", "sway/language", "battery", "bluetooth", "network", "tray", "clock"],
+    // Modules configuration
+    "bluetooth": {
+	"interval": 30,
+	"format": "{icon}",
+	"format-alt": "bluetooth: {status}",
+  "format-icons": {
+		"enabled": "",
+		"disabled": ""
+  },
+  "tooltip-format": "{}"
+    },
+    "sway/workspaces": {
+        "all-outputs": true,
+        "format": "{icon}",
+    },
+    "wlr/taskbar": {
+      "format": "{icon} {title:.30}",
+      "icon-size": 14,
+      "icon-theme": "Tela",
+      "tooltip-format": "{title}",
+      "on-click": "activate",
+      "on-click-middle": "close",
+    },
+    "sway/window": {
+        "icon": true
+    },
+    "sway/language": {
+        "on-click": "swaymsg -t get_inputs -r | jq '[.[] | select(.type == \"keyboard\") | .xkb_active_layout_index][0] - 1 | fabs' | xargs swaymsg 'input type:keyboard xkb_switch_layout'",
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "unknown-tag": "N/A",
+        "interval": 2,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "clock": {
+        "format": "{:%B %d, %Y | %I:%M %p}",
+        "tooltip-format": "{:%B %d, %Y | %I:%M %p}",
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": [ "", "","", "", "", "", ""]
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 10
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        "format-good": "{icon}", // An empty format will hide the module
+        "format-full": "{icon}",
+        "format-icons": ["","","","","","", "", "", "", "", ""]
+    },
+    "battery#bat2": {
+        "bat": "BAT2",
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}%",
+        "format-alt": "{capacity}%",
+        "format-icons": ["","","","","","", "", "", "", "", ""]
+    },
+    /* "network": { */
+    /*     // "interface": "wlp2*", // (Optional) To force the use of this interface */
+    /*     "format-wifi": "", */
+    /*     "format-ethernet": "{ifname}: {ipaddr}/{cidr} ", */
+    /*     "format-linked": "{ifname} (No IP) ", */
+    /*     "format-disconnected": "Disconnected ⚠", */
+    /*     "format-alt": "{ifname}: {ipaddr}/{cidr}" */
+    /* }, */
+    "network": {
+    /* "interface": "wlp2s0", */
+    "format": "{ifname}",
+    "format-wifi": "",
+    "format-ethernet": "{ipaddr}/{cidr} ",
+    "format-disconnected": "", //An empty format will hide the module.
+    "tooltip-format": "{ifname} via {gwaddr} ",
+    "tooltip-format-wifi": "  {essid} ({signalStrength}%) {ipaddr}",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50
+},
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": "{format_source}婢",
+        "format-muted": "{volume}% 婢",
+        "format-icons": {
+            "default": ["", "", ""]
+        },
+        "on-click": "alsamixer"
+    },
+    "custom/media": {
+        "format": "{icon} {}",
+        "return-type": "json",
+        "max-length": 40,
+        "format-icons": {
+            "spotify": "",
+            "default": "🎜"
+        },
+        "escape": true,
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    },
+    /* "custom/menu": { */
+    /*     "format": "", */
+    /*     "on-click": "wofi --show drun -i | xargs swaymsg exec --" */
+    /* }, */
+    /* "custom/power": { */
+    /*     "format": "⏻" */
+    /* } */
+}

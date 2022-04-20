@@ -1,0 +1,6 @@
+#!/bin/sh
+
+killall picom &
+picom -b --config ~/.config/picom.conf --experimental-backends &
+~/.fehbg &
+setxkbmap -option caps:escape &

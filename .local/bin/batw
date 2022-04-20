@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ "$1" == *".zip"* ]]; then
+  batzip $1
+else
+  bat $1
+fi

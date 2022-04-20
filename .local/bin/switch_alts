@@ -1,0 +1,2 @@
+#!/bin/sh
+setxkbmap -option lv3:lalt_switch -option lv3:ralt_alt

@@ -1,0 +1,9 @@
+#!/bin/sh
+list=$(unzip -qq -l $1 | awk '{print $4; }' |tac)
+echo "Reading..."
+while IFS= read -r line; do
+  echo $line
+  TEXT=$TEXT$(unzip -p $1 "$line")
+done <<< "$list"
+
+echo "$TEXT" | less

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+/home/opal/.local/bin/winapps onenote-o365-x86 onenote-o365-x86 svg
+

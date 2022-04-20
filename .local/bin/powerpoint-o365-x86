@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+/home/opal/.local/bin/winapps powerpoint-o365-x86 powerpoint-o365-x86 svg
+

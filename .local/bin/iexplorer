@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+/home/opal/.local/bin/winapps iexplorer iexplorer svg
+

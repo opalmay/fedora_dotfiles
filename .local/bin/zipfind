@@ -1,0 +1,10 @@
+#!/bin/sh
+
+for file in $(ls -t); do
+  printf "\rSearching $file\r"
+  if ( unzip -c "$file" 2>/dev/null | grep -iq "$1" ); then
+    printf "\033[K$file\n\r"
+  elif ( grep -iq "$1" $file ); then
+    printf "\033[K$file\n\r"
+  fi
+done

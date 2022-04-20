@@ -1,0 +1,2 @@
+#!/bin/sh
+pipewire -c /home/opal/.config/filter-chain.conf & disown

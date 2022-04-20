@@ -1,0 +1,3 @@
+#/bin/sh
+eval $( gp-saml-gui -vvv --clientos=Windows --gateway nicevpn.nice.com )
+echo "$COOKIE" | sudo -E openconnect --protocol=gp -u "$USER" --passwd-on-stdin "$HOST" -vvv --usergroup=gateway:prelogin-cookie --os="win" --csd-wrapper=hipreport.sh

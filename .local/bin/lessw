@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ "$1" == *".zip"* ]]; then
+  # zcat $1 | /usr/bin/less
+  lesszip $1
+else
+  /usr/bin/less $1
+fi
