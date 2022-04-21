@@ -1,0 +1,7 @@
+# Reload sxhkdrc 
+ctrl + shift + r
+   pkill -usr1 -x sxhkd; notify-send 'sxhkd' 'Reloaded config'
+super + o ; {b,d,r,t,k,v,h} 
+   {jumpapp -C brave-browser,jumpapp -C dolphin, jumpapp -C remmina, jumpapp -C "/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=teams --file-forwarding com.microsoft.Teams", jumpapp -C keepassxc, jumpapp -C codium, jumpapp -C vmware-view}
+super + return
+  konsole
