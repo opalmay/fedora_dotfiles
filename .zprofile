@@ -327,7 +327,7 @@ ex=:\
 # esac
 # export KDEWM=/usr/bin/i3
 # export DESKTOP_SESSION=plasma
-# [ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx > /dev/null 2>&1
+[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx > /dev/null 2>&1
 # else
 # 	echo "\033[31mIMPORTANT\033[0m: Note that \033[32m\`libxft-bgra\`\033[0m must be installed for this build of dwm.
 # Please run:

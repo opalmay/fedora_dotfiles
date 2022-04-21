@@ -23,11 +23,13 @@ if [ ! -f $startup_lock_file ]; then
   pasystray &
 	# xfce4-power-manager &
 	ksuperkey &
+  easystroke &
   # bspi_listen --config ~/.config/bspwm/bspi.ini &
 	# flashfocus &
   # davmail &
   clipster -d &
   dunst &
+  bspswallow &
 fi
 
 
