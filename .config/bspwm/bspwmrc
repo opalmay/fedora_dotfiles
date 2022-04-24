@@ -11,7 +11,6 @@ if [ ! -f $startup_lock_file ]; then
 	touch $startup_lock_file
 
 	autorandr --change &
-  tint2 &
   bspm -d &
   sxhkd &
 	xsetroot -cursor_name left_ptr &
@@ -30,22 +29,37 @@ if [ ! -f $startup_lock_file ]; then
   clipster -d &
   dunst &
   bspswallow &
+  start_noise_canceling &
+  xautolock -time 10 -locker "cmatrixlock-bspwm" -detectsleep &
+
+  tint2 &
+  sleep 0.1 &&
+  xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" $(xdo id -n tint2)
 fi
 
 
 bspc config single_monocle false
+
+monitors=$(bspc query -M)
+while read monitor; do
+  bspc monitor "$monitor" -d 1 2 3 4 5 6 7 8 9
+done <<< "$monitors"
+
 # monitors
-I=1
-M=$(bspc query -M | wc -l)
-if [ "$M" = 1 ]; then
-  bspc monitor -d 1 2 3 4 5 6 7 8 9
+# I=1
+# M=$(bspc query -M | wc -l)
+# if [ "$M" = 1 ]; then
+#   bspc monitor -d 1 2 3 4 5 6 7 8 9
+
   # if [ $(bspc query -M --names) = "eDP1" ]; then 
     # bspc config single_monocle true
   # fi
 # elif [ "$M" = 2 ]; then
-else
-  bspc monitor $(bspc query -M | awk NR==1) -d 1 2 3 4 5 6 7 8 9
-  bspc monitor $(bspc query -M | awk NR==2) -d 1 2 3 4 5 6 7 8 9
+
+# else
+#   bspc monitor $(bspc query -M | awk NR==1) -d 1 2 3 4 5 6 7 8 9
+#   bspc monitor $(bspc query -M | awk NR==2) -d 1 2 3 4 5 6 7 8 9
+
 # elif [ "$M" = 3 ]; then
 #   bspc monitor $(bspc query -M | awk NR==1) -d 1 2 3 4 5
 #   bspc monitor $(bspc query -M | awk NR==2) -d 1 2 3 4
@@ -61,7 +75,7 @@ else
 #   bspc monitor $(bspc query -M | awk NR==3) -d 5 6
 #   bspc monitor $(bspc query -M | awk NR==4) -d 7 8
 #   bspc monitor $(bspc query -M | awk NR==5) -d 9 10
-fi
+# fi
 
 bspc config remove_unplugged_monitors     true
 bspc config border_width                  4
@@ -93,6 +107,7 @@ bspc config presel_feedback_color	      "#5e81ac"
 # floating rules
 bspc rule -r "*"
 bspc rule -a Java state=floating
+bspc rule -a zoom state=floating
 # bspc rule -a Galculator state=floating
 bspc rule -a "Apache Directory Studio" rectangle=1000x680+0+0 center=true
 bspc rule -a "Brave-browser:pop-up" state=floating

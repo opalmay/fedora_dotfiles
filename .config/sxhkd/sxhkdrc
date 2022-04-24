@@ -54,7 +54,7 @@ super + g
 super + f
 	bspc node -t \~fullscreen
 
-super + shift +f
+super + shift + f
   for node_i in $(bspc query -N -n '.!focused.window' -d focused);  \
 	do \
 	bspc node $node_i -g hidden; \
@@ -116,7 +116,11 @@ alt + Tab
 Menu
 	bspc node -f next.local.!hidden.window
 super + Tab
-	bspc node -f next.local.!hidden.window
+	bspc node -f next.local.!hidden.window; \
+  for node_i in $(bspc query -N -n '.!focused.window' -d focused);  \
+	do \
+	bspc node $node_i -g hidden; \
+	done
 
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
@@ -255,10 +259,10 @@ alt + F1
 # take a screenshot
 Print
   maim -s --format png /dev/stdout | xclip -selection clipboard -t image/png -i; \
-  notify-send -u "low" -t 2000 "Copied" "Screenshot copied to clipboard!"
+  notify-send -u low "Copied" "Screenshot copied to clipboard!"
 super + Print
   maim -s ~/Pictures/Screenshots/$(date +%s).png; \
-  notify-send -u "low" -t 2000 "Saved" "Screenshot saved!"
+  notify-send -u low "Saved" "Screenshot saved!"
 
 super + shift + Print
   flameshot gui
@@ -323,11 +327,18 @@ XF86MonBrightness{Up,Down}
 
 # lock screen
 super + shift + equal
-  betterlockscreen -l dim
+  cmatrixlock-bspwm
 
 super + v
   roficlip && xclip -o --selection primary 
 
+# toggle picom
+super + shift + c
+  killall picom || picom -b --config ~/.config/picom.conf --experimental-backends
+
+# toggle autolock
+XF86Display
+  (killall xautolock && notify-send -u low "Autolock off") || (xautolock -time 10 -locker "cmatrixlock-bspwm" -detectsleep & notify-send -u low "Autolock on")
 # super + space
 #   xkb-switch -n
 

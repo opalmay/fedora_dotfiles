@@ -51,7 +51,7 @@ return packer.startup(function(use)
 		run = ":TSUpdate",
 	})
 
-	use("p00f/nvim-ts-rainbow")
+	-- use("p00f/nvim-ts-rainbow")
 
 	use({
 		"karb94/neoscroll.nvim",
