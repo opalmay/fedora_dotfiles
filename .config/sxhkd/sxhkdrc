@@ -344,3 +344,8 @@ XF86Display
 
 # alt + shift
 #   xkb-switch -n
+ctrl + alt + Escape
+  xkill
+
+XF86Calculator
+  galculator

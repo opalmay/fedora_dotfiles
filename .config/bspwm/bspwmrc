@@ -10,6 +10,7 @@ startup_lock_file=/tmp/bspwm-startup.lock
 if [ ! -f $startup_lock_file ]; then
 	touch $startup_lock_file
 
+  tint2 &
 	autorandr --change &
   bspm -d &
   sxhkd &
@@ -32,8 +33,7 @@ if [ ! -f $startup_lock_file ]; then
   start_noise_canceling &
   xautolock -time 10 -locker "cmatrixlock-bspwm" -detectsleep &
 
-  tint2 &
-  sleep 0.1 &&
+  # tint2 fix for fullscreen
   xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" $(xdo id -n tint2)
 fi
 
@@ -79,7 +79,11 @@ done <<< "$monitors"
 
 bspc config remove_unplugged_monitors     true
 bspc config border_width                  4
-bspc config window_gap                    10
+window_gap=20
+if [[ -z $(bspc query -M --names | grep DP-1) ]]; then
+  window_gap=10
+fi
+bspc config window_gap                    $window_gap
 bspc config top_padding                   26
 bspc config bottom_padding                0
 bspc config left_padding                  0
@@ -108,6 +112,7 @@ bspc config presel_feedback_color	      "#5e81ac"
 bspc rule -r "*"
 bspc rule -a Java state=floating
 bspc rule -a zoom state=floating
+bspc rule -a Galculator state=floating
 # bspc rule -a Galculator state=floating
 bspc rule -a "Apache Directory Studio" rectangle=1000x680+0+0 center=true
 bspc rule -a "Brave-browser:pop-up" state=floating

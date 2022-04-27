@@ -53,12 +53,12 @@ return packer.startup(function(use)
 
 	-- use("p00f/nvim-ts-rainbow")
 
-	use({
-		"karb94/neoscroll.nvim",
-		config = function()
-			require("neoscroll").setup()
-		end,
-	})
+	-- use({
+	-- 	"karb94/neoscroll.nvim",
+	-- 	config = function()
+	-- 		require("neoscroll").setup()
+	-- 	end,
+	-- })
 
 	use("windwp/nvim-autopairs")
 	use("numToStr/Comment.nvim")
