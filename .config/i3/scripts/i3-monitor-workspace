@@ -9,11 +9,7 @@ case $1 in
   i3-msg workspace "${focused_monitor_index}${2}"
   ;;
   move)
-  re='^[0-9]+$'
-  if ! [[ $yournumber =~ $re ]] ; then
-  i3-msg "workspace next_on_output"
-   else
-   i3-msg move container to workspace "${focused_monitor_index}${2}"
-  fi
+  i3-msg move container to workspace "${focused_monitor_index}${2}"
+  i3-msg workspace "${focused_monitor_index}${2}"
   ;;
 esac

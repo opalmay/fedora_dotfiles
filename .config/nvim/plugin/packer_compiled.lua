@@ -124,12 +124,6 @@ _G.packer_plugins = {
     path = "/home/opal/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
-  ["live.nvim"] = {
-    config = { "\27LJ\2\n2\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\tlive\frequire\0" },
-    loaded = true,
-    path = "/home/opal/.local/share/nvim/site/pack/packer/start/live.nvim",
-    url = "https://github.com/chentau/live.nvim"
-  },
   ["nord.nvim"] = {
     loaded = true,
     path = "/home/opal/.local/share/nvim/site/pack/packer/start/nord.nvim",
@@ -216,10 +210,6 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: live.nvim
-time([[Config for live.nvim]], true)
-try_loadstring("\27LJ\2\n2\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\tlive\frequire\0", "config", "live.nvim")
-time([[Config for live.nvim]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)

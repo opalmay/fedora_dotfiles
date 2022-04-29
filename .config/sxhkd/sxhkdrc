@@ -27,10 +27,6 @@ ctrl + alt + Delete
 
 # SCRIPTS
 
-# next wallpaper
-# super + n
-# 	nitrogen --set-zoom-fill --random ~/Documents/wallpapers/ --save
-
 # kill an app
 super + ctrl + x
 	xkill
@@ -45,9 +41,6 @@ alt + F1
 # super + p
 # 	rofi -show fb -modi "fb:~/.bin/configure_displays" -location 2
 
-# connect to a vpn
-# super + shift + v
-#   rofi -show fb -modi "fb:~/.bin/vpnconnectrofi" -location 2
 # take a screenshot
 Print
   maim -s --format png /dev/stdout | xclip -selection clipboard -t image/png -i; \
@@ -59,14 +52,6 @@ super + Print
 super + shift + Print
   flameshot gui
 
-# volume keys
-#{XF86AudioRaiseVolume, F8}
-#  pactl set-sink-volume 4 +5%
-#{XF86AudioLowerVolume, F7}
-#  pactl set-sink-volume 4 -5%
-#{XF86AudioMute, F6}
-#  pactl set-sink-mute 4 toggle
-
 XF86AudioRaiseVolume
   pactl set-sink-volume 0 +5%
 XF86AudioLowerVolume
@@ -76,19 +61,6 @@ XF86AudioMute
 
 XF86MonBrightness{Up,Down}
   brightnessctl s 1920{+,-}
-
-# Changing the Volume
-# XF86Audio{Raise,Lower}Volume
-# pulsemixer --change-volume {+,-}10
-# XF86AudioMute
-# pulsemixer --toggle-mute
-# show powermenu
-# super + shift + e
-#   ~/.bin/powermenu
-
-# resart pulseaudio
-# super + shift + o
-#   pulseaudio -k && pulseaudio --start
 
 # lock screen
 super + shift + equal
@@ -117,9 +89,14 @@ XF86Calculator
   galculator
 
 # Super_R
-#   xdotool click 8
+#   xdotool key Super_L
 
 # i3
+super + shift + p
+  i3-msg exit
+super + shift + r
+  i3-msg reload
+
 super + q
   i3-msg kill
 
@@ -142,6 +119,9 @@ super + {h,j,k,l}
   i3-msg focus {left,down,up,right}
 # Move
 super + shift + {h,j,k,l}
+  direction={left,down,up,right}; \
+  i3-msg mark swap; i3-msg focus $direction; i3-msg swap container with mark swap; i3-msg focus $direction;
+super + shift + n; super + shift + {h,j,k,l}
   i3-msg move {left,down,up,right}
 # Resize
 super + ctrl + {j,k}
@@ -149,11 +129,24 @@ super + ctrl + {j,k}
 super + ctrl + {h,l}
   i3-msg resize {shrink,grow} width 20 px
 
-
 super + g
   i3-swapper
 
+super + m
+  i3-msg layout tabbed
+super + t
+  i3-msg layout toggle split
+
+super + f
+  i3-msg fullscreen
+
+super + s
+  i3-msg floating toggle
+super + minus
+  i3-msg scratchpad show
+super + shift + minus
+  i3-msg move scratchpad
 super + backslash
-  i3-msg splith
-super + bar
   i3-msg splitv
+super + bar
+  i3-msg splith

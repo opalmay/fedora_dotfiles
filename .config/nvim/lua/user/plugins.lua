@@ -69,12 +69,12 @@ return packer.startup(function(use)
 	use("akinsho/bufferline.nvim")
 	use("moll/vim-bbye")
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
-	use({
-		"chentau/live.nvim",
-		config = function()
-			require("live").setup()
-		end,
-	})
+	-- use({
+	-- 	"chentau/live.nvim",
+	-- 	config = function()
+	-- 		require("live").setup()
+	-- 	end,
+	-- })
 	use({ "dstein64/vim-startuptime", cmd = "StartupTime" })
   use("tversteeg/registers.nvim")
 

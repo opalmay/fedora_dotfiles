@@ -5,7 +5,7 @@
 # to clean up.
 
 # Adds `~/.local/bin` to $PATH
-export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}:/home/opal/.local/share/cargo/bin"
+export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}:/home/opal/.local/share/cargo/bin:/home/opal/.config/i3/scripts"
 
 unsetopt PROMPT_SP
 

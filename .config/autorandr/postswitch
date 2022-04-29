@@ -1,4 +1,7 @@
 #!/bin/sh
 
 sleep 1
-/home/opal/.config/bspwm/bspwmrc
+# /home/opal/.config/bspwm/bspwmrc
+picom -b --config ~/.config/picom.conf --experimental-backends && feh --bg-fill ~/.local/wallpaper2.png
+feh --bg-fill ~/.local/wallpaper2.png
+setxkbmap -option caps:escape

@@ -4,7 +4,7 @@
 picom -b --config ~/.config/picom.conf --experimental-backends &
 setxkbmap -option caps:escape &
 feh --bg-fill ~/.local/wallpaper2.png &
-
+xinput --set-prop 26 336 0.5
 # run once
 startup_lock_file=/tmp/bspwm-startup.lock
 if [ ! -f $startup_lock_file ]; then
@@ -79,7 +79,7 @@ done <<< "$monitors"
 
 bspc config remove_unplugged_monitors     true
 bspc config border_width                  4
-window_gap=20
+window_gap=15
 if [[ -z $(bspc query -M --names | grep DP-1) ]]; then
   window_gap=10
 fi
