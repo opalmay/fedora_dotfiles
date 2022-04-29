@@ -1,0 +1,24 @@
+#!/bin/sh
+
+monitors=$(xrandr --listactivemonitors | cut -d" " -f6 | grep .)
+main_monitor=$(echo "$monitors" | head -1)
+echo $main_monitor >> /tmp/i3-monitor
+i3-msg workspace 1 output $main_monitor
+i3-msg workspace 2 output $main_monitor
+i3-msg workspace 3 output $main_monitor
+i3-msg workspace 4 output $main_monitor
+i3-msg workspace 5 output $main_monitor
+i3-msg workspace 6 output $main_monitor
+i3-msg workspace 7 output $main_monitor
+i3-msg workspace 8 output $main_monitor
+i3-msg workspace 9 output $main_monitor
+i3-msg workspace 10 output $main_monitor
+if [[ $(echo "$monitors" | wc -l) == 2 ]]; then
+  second_monitor=$(echo "$monitors" | sed -n 2p)
+  echo $second_monitor >> /tmp/i3-monitor
+  i3-msg workspace 11 output $second_monitor
+  i3-msg workspace 12 output $second_monitor
+  i3-msg workspace 13 output $second_monitor
+  i3-msg workspace 14 output $second_monitor
+  i3-msg workspace 15 output $second_monitor
+fi

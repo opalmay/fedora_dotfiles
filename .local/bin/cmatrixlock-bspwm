@@ -1,0 +1,48 @@
+#!/bin/sh
+for node_i in $(bspc query -N); do
+  bspc node $node_i -g hidden=on
+done
+# kitty -c ~/.config/kitty/kitty.cmatrix.config -e cmatrix &
+# kitty -e cmatrix &
+# sleep 0.2
+# bspc node -t \~fullscreen
+
+# kitty -c ~/.config/kitty/kitty.cmatrix.config -e cmatrix &
+# M=$(bspc query -M | wc -l)
+# for ((i = 0; i < $M; i++)); do
+#   echo "$i"
+# done
+
+monitors=$(bspc query -M)
+while read monitor; do
+  bspc monitor -f $monitor
+  kitty -e cmatrix &
+  sleep 0.2
+  bspc node -t \~fullscreen
+done <<< "$monitors"
+
+killall tint2
+
+i3lock -nt
+# xlock -mode blank -geometry 1x1
+
+while read monitor; do
+  bspc monitor -f $monitor
+  bspc node -k
+done <<< "$monitors"
+# while read monitor; do
+#   bspc monitor -f $monitor
+#   kitty -e cmatrix &
+#   sleep 0.2
+#   bspc node -t \~fullscreen
+#   bspc node -k
+# done <<< "$monitors"
+# bspc monitor -f prev
+tint2 & disown
+sleep 0.1
+# tint2 fix for fullscreen
+xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" $(xdo id -n tint2)
+
+for node_i in $(bspc query -N); do
+  bspc node $node_i -g hidden=off
+done

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Detect current monitor and switch accordingly
+# focused_monitor=$(get_focused_monitor)
+
+monitors=$(xrandr --listactivemonitors | cut -d" " -f6 | grep .)
+focused_monitor=$(i3-msg -t get_workspaces | jq '.[] | select (.focused == true) | {output}' | grep : | cut -d: -f2 | cut -d\" -f2)
+echo $focused_monitor
+# focused_monitor_index=$(expr $(echo "$monitors" | grep -wn $(i3-msg -t get_workspaces | jq '.[] | select (.focused == true) | {output}' | grep : | cut -d: -f2 | cut -d\" -f2)  | cut -f1 -d:) - 1)
+# expr $focused_monitor_index || focused_monitor_index=""
+echo "switching to workspace ${focused_monitor_index}${1}"
+# i3-msg workspace "${focused_monitor_index}${1}"
+i3-msg '[workspace="${1}"]' move workspace to output $focused_monitor || i3-msg workspace $1
