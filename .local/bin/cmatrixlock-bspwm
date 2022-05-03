@@ -38,11 +38,11 @@ done <<< "$monitors"
 #   bspc node -k
 # done <<< "$monitors"
 # bspc monitor -f prev
+for node_i in $(bspc query -N); do
+  bspc node $node_i -g hidden=off
+done
+
 tint2 & disown
 sleep 0.1
 # tint2 fix for fullscreen
 xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" $(xdo id -n tint2)
-
-for node_i in $(bspc query -N); do
-  bspc node $node_i -g hidden=off
-done

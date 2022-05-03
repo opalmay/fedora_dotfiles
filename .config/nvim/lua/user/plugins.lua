@@ -68,16 +68,34 @@ return packer.startup(function(use)
 	use("kyazdani42/nvim-tree.lua")
 	use("akinsho/bufferline.nvim")
 	use("moll/vim-bbye")
-	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
+	-- use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
 	-- use({
 	-- 	"chentau/live.nvim",
 	-- 	config = function()
 	-- 		require("live").setup()
 	-- 	end,
 	-- })
-	use({ "dstein64/vim-startuptime", cmd = "StartupTime" })
+	-- use({ "dstein64/vim-startuptime", cmd = "StartupTime" })
   use("tversteeg/registers.nvim")
-
+  use {
+    "ur4ltz/surround.nvim", -- sa/s in visual
+    config = function()
+      require"surround".setup {mappings_style = "sandwich"}
+    end
+  }
+--   {
+--   nestable = {
+--     b = { "(", ")" },
+--     s = { "[", "]" },
+--     B = { "{", "}" },
+--     a = { "<", ">" }
+--     },
+--   linear = {
+--     q = { "'", "'" },
+--     t = { "`", "`" },
+--     d = { '"', '"' }
+--   },
+-- }
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()

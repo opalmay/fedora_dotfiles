@@ -89,7 +89,8 @@ XF86Calculator
   galculator
 
 # Super_R
-#   xdotool key Super_L
+#   xdotool keydown Super_R
+  # xdotool mousedown 3
 
 # i3
 super + shift + p
@@ -125,9 +126,9 @@ super + shift + n; super + shift + {h,j,k,l}
   i3-msg move {left,down,up,right}
 # Resize
 super + ctrl + {j,k}
-  i3-msg resize {shrink,grow} height 20 px
+  i3-msg resize {shrink,grow} height 40 px
 super + ctrl + {h,l}
-  i3-msg resize {shrink,grow} width 20 px
+  i3-msg resize {shrink,grow} width 40 px
 
 super + g
   i3-swapper
@@ -136,6 +137,9 @@ super + m
   i3-msg layout tabbed
 super + t
   i3-msg layout toggle split
+super + y
+  i3-msg layout stacking; \
+  notify-send -u low "Stacking"
 
 super + f
   i3-msg fullscreen

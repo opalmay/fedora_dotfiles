@@ -129,11 +129,6 @@ _G.packer_plugins = {
     path = "/home/opal/.local/share/nvim/site/pack/packer/start/nord.nvim",
     url = "https://github.com/shaunsingh/nord.nvim"
   },
-  ["null-ls.nvim"] = {
-    loaded = true,
-    path = "/home/opal/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
-    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
-  },
   ["nvim-autopairs"] = {
     loaded = true,
     path = "/home/opal/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
@@ -189,6 +184,12 @@ _G.packer_plugins = {
     path = "/home/opal/.local/share/nvim/site/pack/packer/start/registers.nvim",
     url = "https://github.com/tversteeg/registers.nvim"
   },
+  ["surround.nvim"] = {
+    config = { "\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\19mappings_style\rsandwich\nsetup\rsurround\frequire\0" },
+    loaded = true,
+    path = "/home/opal/.local/share/nvim/site/pack/packer/start/surround.nvim",
+    url = "https://github.com/ur4ltz/surround.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/opal/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -198,24 +199,14 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/opal/.local/share/nvim/site/pack/packer/start/vim-bbye",
     url = "https://github.com/moll/vim-bbye"
-  },
-  ["vim-startuptime"] = {
-    commands = { "StartupTime" },
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/home/opal/.local/share/nvim/site/pack/packer/opt/vim-startuptime",
-    url = "https://github.com/dstein64/vim-startuptime"
   }
 }
 
 time([[Defining packer_plugins]], false)
-
--- Command lazy-loads
-time([[Defining lazy-load commands]], true)
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file StartupTime lua require("packer.load")({'vim-startuptime'}, { cmd = "StartupTime", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
-time([[Defining lazy-load commands]], false)
-
+-- Config for: surround.nvim
+time([[Config for surround.nvim]], true)
+try_loadstring("\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\19mappings_style\rsandwich\nsetup\rsurround\frequire\0", "config", "surround.nvim")
+time([[Config for surround.nvim]], false)
 if should_profile then save_profiles() end
 
 end)

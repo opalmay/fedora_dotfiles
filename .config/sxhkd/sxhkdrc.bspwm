@@ -16,9 +16,9 @@ super + q
 
 # alternate between the tiled and monocle layout
 super + m
-  bsp-layout set monocle
+  bspc desktop -l next
+  # bsp-layout set monocle
   # notify-send $(bsp-layout cycle --layouts tiled,tall,wide,grid)
-  # bspc desktop -l next
   # windows=$(wmctrl -l|awk '\{$3=""; $2=""; $1=""; print $0\}'); \
   # while IFS= read -r window; do; \
   # transset-df -n $window 0; \
@@ -36,12 +36,13 @@ super + 0
   bsp-layout once tall
 
 super + t
-  bsp-layout set tiled
+  bspc desktop -l next
+  # bsp-layout set tiled
   # bsp-layout once tall
-super + y
-  bsp-layout once grid
-
-# send the newest marked node to the newest preselected node
+# super + y
+#   bsp-layout once grid
+#
+# # send the newest marked node to the newest preselected node
 #super + y
 #	bspc node newest.marked.local -n newest.!automatic.local
 
@@ -76,8 +77,8 @@ super + {_,shift + } s
 	{_,bspc node -g sticky}
 
 # set the node flags
-super + ctrl + {m,b,y,z}
-	bspc node -g {marked,locked,sticky,private}
+# super + ctrl + {m,b,y,z}
+# 	bspc node -g {marked,locked,sticky,private}
 
 
 # FOCUS/SWAP
@@ -91,10 +92,10 @@ super + {h,j,k,l}
 # super + shift + {h,j,k,l}
 #   bspc node -s {west,south,north,east}
 super + shift + {h,j,k,l}
-  bspwm_smart_move {west,south,north,east}
-   # dir={west,south,north,east}; \
-	# bspc node -s "$dir.local" --follow \
- #    || bspc node -m "$dir" --follow
+  dir={west,south,north,east}; \
+	bspc node -s "$dir.local" --follow \
+    || bspc node -m "$dir" --follow
+# bspwm_smart_move {west,south,north,east}
 # super + shift + {h,j,k,l}
 # 	~/.config/bspwm/bspwm_smart_move {west,south,north,east}
 # rotate tree
@@ -111,19 +112,18 @@ super + equal
 #super + {p,b,comma,period}
 #	bspc node -f @{parent,brother,first,second}
 
-# focus the next/previous node in the current desktop
-#super + {_,shift + }n
-#	bspc node -f {next,prev}.local.!hidden.window
 alt + Tab
-	bspc node -f next.local.!hidden.window && transset-df -a 100
+	bspc node -f next.local.!hidden.window
+  # bspc node -f next.local.!hidden.window && transset-df -a 100
 Menu
 	bspc node -f next.local.!hidden.window
 super + Tab
-	bspc node -f next.local.!hidden.window; \
-  for node_i in $(bspc query -N -n '.!focused.window' -d focused);  \
-	do \
-	bspc node $node_i -g hidden; \
-	done
+  bspc node -f next.local.!hidden.window
+	# bspc node -f next.local.!hidden.window; \
+ #  for node_i in $(bspc query -N -n '.!focused.window' -d focused);  \
+	# do \
+	# bspc node $node_i -g hidden; \
+	# done
 
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
@@ -168,8 +168,8 @@ super + shift + {1-9,0}
 super + p ; super + {h,j,k,l,semicolon}
 	bspc node -p {west,south,north,east,cancel}
 
-super + alt + {h,j,k,l}
-	bspc node -p {west,south,north,east,cancel}
+# super + alt + {h,j,k,l}
+# 	bspc node -p {west,south,north,east,cancel}
 # preselect the ratio
 super + alt + {1-9}
 	bspc node -o 0.{1-9}
@@ -225,7 +225,7 @@ super + b
 
 # pcmanfm
 super + d
-	pcmanfm
+	thunar
 
 # ranger
 super + r
@@ -239,14 +239,11 @@ ctrl + alt + Delete
 # SCRIPTS
 
 # next wallpaper
-super + n
-	nitrogen --set-zoom-fill --random ~/Documents/wallpapers/ --save
+# super + n
+# 	nitrogen --set-zoom-fill --random ~/Documents/wallpapers/ --save
 
-# kill an app
-super + ctrl + x
-	xkill
-super + shift + p
-	~/.bin/picom-toggle.sh
+# super + shift + t
+# 	~/.bin/picom-toggle.sh
 
 # app launcher (mapped to super using ksuperkey)
 alt + F1
@@ -333,8 +330,8 @@ super + shift + equal
   cmatrixlock-bspwm
 
 super + v
-  # roficlip
   roficlip && xclip -o --selection primary
+  # roficlip
 
 # toggle picom
 super + shift + c
@@ -342,7 +339,11 @@ super + shift + c
 
 # toggle autolock
 XF86Display
-  (killall xautolock && notify-send -u low "Autolock off") || (xautolock -time 10 -locker "cmatrixlock-bspwm" -detectsleep & notify-send -u low "Autolock on")
+  (killall xautolock && notify-send -u low "Autolock off") || (xautolock -time 15 -locker "cmatrixlock-bspwm" -detectsleep & notify-send -u low "Autolock on")
+
+# toggle headphones
+super + shift + o
+  toggle_headphones
 # super + space
 #   xkb-switch -n
 

@@ -2,18 +2,19 @@
 
 # run every time bspwm restarts
 picom -b --config ~/.config/picom.conf --experimental-backends &
-setxkbmap -option caps:escape &
 feh --bg-fill ~/.local/wallpaper2.png &
-xinput --set-prop 26 336 0.5
+# xinput --set-prop 26 336 0.5
 # run once
 startup_lock_file=/tmp/bspwm-startup.lock
 if [ ! -f $startup_lock_file ]; then
+  toggle_headphones
 	touch $startup_lock_file
 
+  setxkbmap -option caps:escape &
   tint2 &
 	autorandr --change &
   bspm -d &
-  sxhkd &
+  sxhkd -c ~/.config/sxhkd/sxhkdrc.bspwm &
 	xsetroot -cursor_name left_ptr &
   /usr/libexec/polkit-gnome-authentication-agent-1 &
   xrdb ~/.Xresources
@@ -30,8 +31,8 @@ if [ ! -f $startup_lock_file ]; then
   clipster -d &
   dunst &
   bspswallow &
-  start_noise_canceling &
-  xautolock -time 10 -locker "cmatrixlock-bspwm" -detectsleep &
+  # start_noise_canceling &
+  # xautolock -time 15 -locker "cmatrixlock-bspwm" -detectsleep &
 
   # tint2 fix for fullscreen
   xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" $(xdo id -n tint2)
