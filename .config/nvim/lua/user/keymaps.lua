@@ -39,6 +39,8 @@ map("n", "J", ":bprevious<CR>")
 
 map("n", "Y", "y$")
 
+map("n", "<leader>cd", ":cd %:p:h<CR>")
+
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 -- map("n", "J", "mzJ`z")
@@ -49,10 +51,10 @@ map("n", "<leader>q", ":Bdelete<CR>")
 map("n", "<leader>/", "gcc")
 -- Replace all occurrences of a word
 map("n", "<leader>r", ':%s/\\<<C-r><C-w>\\>/')
-map("n", "U", '/<C-r><C-w><CR>')
+-- map("n", "U", '/<C-r><C-w><CR>')
 
 -- Close current buffer
-map("n", "Q", ":bdelete<CR>")
+map("n", "Q", ":Bdelete<CR>")
 
 map("n", "<ESC>", ":noh<CR><ESC>")
 
@@ -61,7 +63,7 @@ map("n", "<C-s>", ":w<CR>")
 
 -- Insert --
 -- Press jk fast to enter
-map("i", "jk", "<ESC>")
+-- map("i", "jk", "<ESC>")
 
 map("i", ",", ",<C-g>u")
 map("i", ".", ".<C-g>u")
@@ -89,3 +91,8 @@ map("x", "K", ":move '<-2<CR>gv=gv")
 -- map("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown())<cr>")
 map("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>")
 map("n", "<c-t>", "<cmd>Telescope live_grep<cr>")
+
+-- map("n", "<leader>", ":<c-u>LeaderGuide '<space>'<CR>")
+-- let mapleader = '\<Space>'
+-- nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
+-- vnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>

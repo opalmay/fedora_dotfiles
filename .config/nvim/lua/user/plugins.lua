@@ -53,12 +53,12 @@ return packer.startup(function(use)
 
 	-- use("p00f/nvim-ts-rainbow")
 
-	-- use({
-	-- 	"karb94/neoscroll.nvim",
-	-- 	config = function()
-	-- 		require("neoscroll").setup()
-	-- 	end,
-	-- })
+	use({
+		"karb94/neoscroll.nvim",
+		config = function()
+			require("neoscroll").setup({easing_function = "cubic"})
+		end,
+	})
 
 	use("windwp/nvim-autopairs")
 	use("numToStr/Comment.nvim")
@@ -96,7 +96,14 @@ return packer.startup(function(use)
 --     d = { '"', '"' }
 --   },
 -- }
+  -- use("spinks/vim-leader-guide")
 	-- Put this at the end after all plugins
+  use({
+    "chentau/marks.nvim",
+    config = function ()
+      require'marks'.setup {}
+    end
+  })
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
 	end

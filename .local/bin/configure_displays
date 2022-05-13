@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ -e $@ ]; then
+  for d in $(autorandr | cut -d" " -f1); do
+      echo $d
+  done
+else
+  autorandr $@ > /dev/null 2>&1
+fi

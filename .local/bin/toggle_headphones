@@ -1,0 +1,10 @@
+#!/bin/sh
+pactl list cards short | cut -d "	" -f1 | while read card ; do
+  pactl set-card-profile $card off
+  if [ -f /tmp/headphones ]; then
+    pactl set-card-profile $card HiFi
+  else
+    pactl set-card-profile $card output:analog-stereo+input:analog-stereo
+  fi
+done
+( rm /tmp/headphones && notify-send Builtin ) || ( touch /tmp/headphones && notify-send Headphones )

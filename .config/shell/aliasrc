@@ -39,6 +39,7 @@ alias \
 	sdn="shutdown -h now" \
 	e="$EDITOR" \
 	v="$EDITOR" \
+  oracle='gqlplus "dirxml/epumhbu@(DESCRIPTION=(LOAD_BALANCE=on) (ADDRESS=(PROTOCOL=TCP)(HOST= tlvx8m-scan1.nice.com) (PORT=1521)) (CONNECT_DATA=(SERVICE_NAME=oraprd)))"'
 
 alias \
 	lf="lfub" \

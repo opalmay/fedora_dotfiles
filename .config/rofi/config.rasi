@@ -3,7 +3,7 @@
 configuration {
 
   /* Highlight an entry under the mouse pointer */
-  hover-select: true;
+  /* hover-select: true; */
 
   /* Disable MousePrimary as an entry selector */
   /* Without this setting you won't be able to set MousePrimary as an entry

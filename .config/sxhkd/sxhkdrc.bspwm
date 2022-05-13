@@ -25,8 +25,8 @@ super + m
   # done; <<< "$windows" \
 
 # mirror layout
-super + shift + m
-	bspc node @/ -R 180
+# super + shift + m
+# 	bspc node @/ -R 180
 
 # move focused window to preselected area
 #	bspc node -n 'last.!automatic.local'
@@ -36,11 +36,11 @@ super + 0
   bsp-layout once tall
 
 super + t
-  bspc desktop -l next
+  bsp-layout once tall
+  # bspc desktop -l next
   # bsp-layout set tiled
-  # bsp-layout once tall
-# super + y
-#   bsp-layout once grid
+super + y
+  bsp-layout once grid
 #
 # # send the newest marked node to the newest preselected node
 #super + y
@@ -49,7 +49,6 @@ super + t
 # swap the current node and the biggest node
 super + g
   bspwm_move_to_biggest_or_preselection
-	# bspc node -s biggest
 
 
 # STATE/FLAGS
@@ -135,23 +134,12 @@ super + shift + bracket{left,right}
 # focus next monitor
 super + {semicolon,apostrophe}
   bspc monitor -f {prev,next}
-# # move desktop between monitors
-# super + shift + {semicolon,apostrophe}
-#     D=$(bspc query -D -d); \
-#     M=$(bspc query -M -m {prev,next}); \
-#     bspc desktop -m {prev,next}; \
-#     bspc query -m {prev,next} -T | jshon -e desktops -a -e name -u | sort -n | xargs bspc monitor $M -o; \
-#     bspc desktop -f $D
-
-# focus the last node/desktop
-#super + {grave,Tab}
-#	bspc {node,desktop} -f last
 
 # focus the older or newer node in the focus history
-#super + {o,i}
-#	bspc wm -h off; \
-#	bspc 'node {older,newer} -f; \
-#	bspc wm -h on
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
 
 # focus or send to the given desktop
 super + {_,ctrl + }{1-9,0}
@@ -176,48 +164,22 @@ super + alt + {1-9}
 super + {u,n}
   bspc node -p {east,south}
 
-
-
-# cancel the preselection for the focused node
-# super + alt + space
-# 	bspc node -p cancel
-
-# cancel the preselection for the focused desktop
-super + alt + shift + space
-	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-
-
 # MOVE/RESIZE
 
-# expand a window by moving one of its side outward
-#ctrl + alt + {h,j,k,l}
-#	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
-
 # expand/contract a window 
-# super + ctrl + {h,j,k,l}
-# 	STEP=30; \
-# 	bspc node -z {left -$STEP 0 || bspc node -z right -$STEP 0, \
-#                 bottom 0 $STEP || bspc node -z top 0 $STEP,\
-#                 top 0 -$STEP || bspc node -z bottom 0 -$STEP,\
-#                 right $STEP 0 || bspc node -z left $STEP 0}
-#
 super + ctrl + {h,j,k,l}
   bspwm_resize {left,down,up,right} 50
 
-# contract a window by moving one of its side inward
-#ctrl + alt + shift + {h,j,k,l}
-#	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
-
 # move a floating window
 super + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}
+	bspc node -v {-40 0,0 40,0 -40,40 0}
 
 
 # APPLICATION KEYBINDINGS
 
 # terminal emulator
 super + Return
-	kitty
+	st
 
 # browser
 super + b
@@ -229,33 +191,23 @@ super + d
 
 # ranger
 super + r
-  alacritty -e ranger
+  st -e ranger
 
 # htop
 ctrl + alt + Delete
-	alacritty -e htop
+	st -e htop
 
 
 # SCRIPTS
-
-# next wallpaper
-# super + n
-# 	nitrogen --set-zoom-fill --random ~/Documents/wallpapers/ --save
-
-# super + shift + t
-# 	~/.bin/picom-toggle.sh
 
 # app launcher (mapped to super using ksuperkey)
 alt + F1
   rofi -modi drun -show drun -show-icons
 
 # switch display mode
-# super + p
-# 	rofi -show fb -modi "fb:~/.bin/configure_displays" -location 2
+super + shift + m
+	rofi -show fb -modi "fb:~/.local/bin/configure_displays" -location 2
 
-# connect to a vpn
-# super + shift + v
-#   rofi -show fb -modi "fb:~/.bin/vpnconnectrofi" -location 2
 # take a screenshot
 Print
   maim -s --format png /dev/stdout | xclip -selection clipboard -t image/png -i; \
@@ -267,6 +219,7 @@ super + Print
 super + shift + Print
   flameshot gui
 
+# Scratchpad
 super + w
 	i=$(bspc query -N -n "focused.floating");\
 	if [ -n "$i" ];then \
@@ -294,36 +247,13 @@ super + shift + w
 		xdotool windowunmap $id;\
 	fi
 
-# volume keys
-#{XF86AudioRaiseVolume, F8}
-#  pactl set-sink-volume 4 +5%
-#{XF86AudioLowerVolume, F7}
-#  pactl set-sink-volume 4 -5%
-#{XF86AudioMute, F6}
-#  pactl set-sink-mute 4 toggle
-
-XF86AudioRaiseVolume
-  pactl set-sink-volume 0 +5%
-XF86AudioLowerVolume
-  pactl set-sink-volume 0 -5%
+{ XF86AudioRaiseVolume, XF86AudioLowerVolume }
+  pactl set-sink-volume 0 {+,-}5%
 XF86AudioMute
   pactl set-sink-mute 0 toggle
 
 XF86MonBrightness{Up,Down}
   brightnessctl s 1920{+,-}
-
-# Changing the Volume
-# XF86Audio{Raise,Lower}Volume
-# pulsemixer --change-volume {+,-}10
-# XF86AudioMute
-# pulsemixer --toggle-mute
-# show powermenu
-# super + shift + e
-#   ~/.bin/powermenu
-
-# resart pulseaudio
-# super + shift + o
-#   pulseaudio -k && pulseaudio --start
 
 # lock screen
 super + shift + equal
@@ -342,13 +272,9 @@ XF86Display
   (killall xautolock && notify-send -u low "Autolock off") || (xautolock -time 15 -locker "cmatrixlock-bspwm" -detectsleep & notify-send -u low "Autolock on")
 
 # toggle headphones
-super + shift + o
+{XF86HomePage, super + shift + o}
   toggle_headphones
-# super + space
-#   xkb-switch -n
 
-# alt + shift
-#   xkb-switch -n
 ctrl + alt + Escape
   xkill
 
