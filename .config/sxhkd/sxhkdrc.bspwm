@@ -85,9 +85,13 @@ super + {_,shift + } s
 # focus the node in the given direction
 #super + {_,shift + }{h,j,k,l}
 #	bspc node -{f,s} {west,south,north,east}
+
+# focus window or monitor in direction
 super + {h,j,k,l}
-  m='.local.!hidden.window'; \
-	bspwm_focus_direction {west$m next$m,south$m prev$m,north$m next$m,east$m prev$m}
+  dir={west,south,north,east}; \
+  bspc node -f $dir || bspc monitor --focus $dir
+ #  m='.local.!hidden.window'; \
+	# bspwm_focus_direction {west$m next$m,south$m prev$m,north$m next$m,east$m prev$m}
 # super + shift + {h,j,k,l}
 #   bspc node -s {west,south,north,east}
 super + shift + {h,j,k,l}
@@ -112,10 +116,10 @@ super + equal
 #	bspc node -f @{parent,brother,first,second}
 
 alt + Tab
-	bspc node -f next.local.!hidden.window
+	bspc node -f next.local && bspwm_monocule_hide
   # bspc node -f next.local.!hidden.window && transset-df -a 100
-Menu
-	bspc node -f next.local.!hidden.window
+# Menu
+# 	bspc node -f next.local.!hidden.window
 super + Tab
   bspc node -f next.local.!hidden.window
 	# bspc node -f next.local.!hidden.window; \
@@ -189,9 +193,9 @@ super + b
 super + d
 	thunar
 
-# ranger
+# lf
 super + r
-  st -e ranger
+  st -e lf
 
 # htop
 ctrl + alt + Delete
@@ -257,7 +261,8 @@ XF86MonBrightness{Up,Down}
 
 # lock screen
 super + shift + equal
-  cmatrixlock-bspwm
+  xscreensaver-command -lock
+  # cmatrixlock-bspwm
 
 super + v
   roficlip && xclip -o --selection primary
@@ -269,7 +274,8 @@ super + shift + c
 
 # toggle autolock
 XF86Display
-  (killall xautolock && notify-send -u low "Autolock off") || (xautolock -time 15 -locker "cmatrixlock-bspwm" -detectsleep & notify-send -u low "Autolock on")
+  (killall xscreensaver && notify-send -u low "Autolock off") || (xscreensaver --no-splash & notify-send -u low "Autolock on")
+  # (killall xautolock && notify-send -u low "Autolock off") || (xautolock -time 15 -locker "cmatrixlock-bspwm" -detectsleep & notify-send -u low "Autolock on")
 
 # toggle headphones
 {XF86HomePage, super + shift + o}
@@ -281,5 +287,7 @@ ctrl + alt + Escape
 XF86Calculator
   galculator
 
+super + shift + e
+  bspwm_resize_16by9
 # Super_R
 #   xdotool click 8

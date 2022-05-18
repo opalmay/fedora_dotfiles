@@ -29,7 +29,7 @@ border_color = #FFFFFF 0
 # launcher_tooltip = 0
 
 # Panel
-panel_items = TSC
+panel_items = TSBC
 panel_monitor = all
 panel_position = top center horizontal
 panel_size = 100% 26
@@ -107,7 +107,7 @@ clock_background_id = 2
 # clock_rclick_command = gnome-activity-journal
 
 # Tooltips
-tooltip = 1
+tooltip = 0
 tooltip_padding = 10 10
 # tooltip_padding = 2 2
 tooltip_show_timeout = 1
@@ -123,15 +123,15 @@ mouse_scroll_up = prev_task
 mouse_scroll_down = next_task
 
 # Battery
-# battery = 0
-# battery_low_status = 10
-# battery_low_cmd = notify-send "battery low"
-# battery_hide = 0
-# bat1_font = JetBrains Mono 12
-# battery_font_color = #FFFFFF 100
-# battery_padding = 0 0
-# battery_background_id = 2
-# bat1_format = %p %s
+battery = 1
+battery_low_status = 10
+battery_low_cmd = notify-send "battery low"
+battery_hide = 95
+bat1_font = JetBrains Mono 10
+battery_font_color = #ECEFF4 100
+battery_padding = 0 0
+battery_background_id = 2
+bat1_format = %p %s
 
 # Battery custom
 # execp = new

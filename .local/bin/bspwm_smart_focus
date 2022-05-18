@@ -1,0 +1,4 @@
+#!/bin/bash
+declare -A dtoc=([north]=prev [south]=next [west]=prev [east]=next)
+bspc node @focused.monocle:/#focused "$1" "${dtoc[$2]}.local.window.!hidden" ||
+    bspc node @focused.tiled:/#focused "$1" "${2}.local"

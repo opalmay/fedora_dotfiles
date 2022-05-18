@@ -1,0 +1,19 @@
+#!/bin/sh
+
+bspc subscribe node_focus | while read line
+do
+  echo $line
+  echo "$line" | awk '{print $4}'
+  id=$(echo "$line" | awk '{print $4}')
+  # sleep 0.1
+  # notify-send $(xdotool getwindowname "$id")
+  title=$(xdotool getwindowname "$id")
+  echo $title
+
+  for node_i in $(bspc query -N); do
+    if [[ $id != $node_i ]]; then
+      bspc node $node_i -g hidden=on
+    fi
+  done
+  bspc node $id -g hidden=off
+done

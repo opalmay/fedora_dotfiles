@@ -2,7 +2,6 @@
 for node_i in $(bspc query -N); do
   bspc node $node_i -g hidden=on
 done
-# kitty -c ~/.config/kitty/kitty.cmatrix.config -e cmatrix &
 # kitty -e cmatrix &
 # sleep 0.2
 # bspc node -t \~fullscreen
@@ -16,7 +15,9 @@ done
 monitors=$(bspc query -M)
 while read monitor; do
   bspc monitor -f $monitor
-  kitty -e cmatrix &
+  # kitty -e cmatrix &
+  kitty -c ~/.config/kitty/kitty.cmatrix.config -e cmatrix &
+  # st -e cmatrix &
   sleep 0.2
   bspc node -t \~fullscreen
 done <<< "$monitors"

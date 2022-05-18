@@ -1,0 +1,18 @@
+#!/bin/sh
+
+bspc subscribe node_add | while read line
+do
+  echo "$line" | awk '{print $5}'
+  id=$(echo "$line" | awk '{print $5}')
+  # sleep 0.1
+  # notify-send $(xdotool getwindowname "$id")
+  title=$(xdotool getwindowname "$id")
+  echo $title
+  #  || "$title" == *"iManager"* ]
+  if [[ "$title" == "Untitled - Brave" ]]; then
+    bspc node $id -t floating
+  fi
+  # if [[ "$title" == *"Properties for"* ]]; then
+    #todo add resize...
+  # fi
+done
