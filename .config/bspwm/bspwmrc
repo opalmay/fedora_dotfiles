@@ -1,21 +1,22 @@
 #!/bin/sh
-
+echo $1 | tee /tmp/bspwmrestart
 # run every time bspwm restarts
 picom -b --config ~/.config/picom.conf --experimental-backends &
-feh --bg-fill ~/.local/wallpaper2.png &
+feh --bg-fill --no-fehbg ~/.local/wallpaper2.png &
 # run once
 startup_lock_file=/tmp/bspwm-startup.lock
 if [ ! -f $startup_lock_file ]; then
 	touch $startup_lock_file
+  mkdir /tmp/opal
 
   setxkbmap -option caps:escape &
   tint2 &
 	autorandr --change &
   bspm -d &
-  sxhkd -c ~/.config/sxhkd/sxhkdrc.bspwm &
+  sxhkd &
 	xsetroot -cursor_name left_ptr &
   /usr/libexec/polkit-gnome-authentication-agent-1 &
-  xrdb ~/.Xresources
+  xrdb ~/.config/x11/xresources
 	numlockx on &
   nm-applet --indicator &
 	blueman-applet &
@@ -36,27 +37,31 @@ if [ ! -f $startup_lock_file ]; then
   xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" $(xdo id -n tint2)
   xscreensaver --no-splash &
   bspwm_node_float &
+  kbdd &
+  alttab -bg "#4B4252" -fg "#ECEFF4" -frame "#597AA0" -font "xft:JetBrains Mono Nerd Font-10" -t 250x140 -i 250x64 -theme "Tela-dark" &
 fi
 
 
 
 monitors=$(bspc query -M)
+echo "$monitors" > /tmp/monitors
 while read monitor; do
   bspc monitor "$monitor" -d 1 2 3 4 5 6 7 8 9
 done <<< "$monitors"
 
 
-bspc config remove_unplugged_monitors     true
 bspc config border_width                  4
-window_gap=15
-# if [[ -z $(bspc query -M --names | grep -w DP-1) ]]; then
-#   window_gap=10
-#   # Set default monocle
-#   bspc query -D | xargs -I {} bspc desktop {} -l monocle
-#   while read -r _ _ d _; do
-#     bspc desktop "$d" -l monocle
-#   done < <(bspc subscribe desktop_add)
-# fi
+if [[ -z $(bspc query -M --names | grep -w DP-1) ]]; then
+  echo "no DP-1"
+  window_gap=5
+  # Set all to monocle
+  bspc query -D | xargs -I {} bspc desktop {} -l monocle
+else
+  echo "yes DP-1"
+  window_gap=15
+  # Set all to tiling
+  bspc query -D | xargs -I {} bspc desktop {} -l tiled
+fi
 bspc config single_monocle false
 bspc config window_gap                    $window_gap
 bspc config top_padding                   26
@@ -64,10 +69,13 @@ bspc config bottom_padding                0
 bspc config left_padding                  0
 bspc config right_padding                 0
 bspc config split_ratio                   0.60
-bspc config borderless_monocle            true
-bspc config gapless_monocle               true
+# bspc config borderless_monocle            true
+# bspc config gapless_monocle               true
+bspc config borderless_monocle            false
+bspc config gapless_monocle               false
 bspc config focus_follows_pointer         true
 # bspc config pointer_follows_focus         true
+bspc config remove_unplugged_monitors     true
 bspc config remove_disabled_monitors      true
 bspc config merge_overlapping_monitors    true
 # bspc config ignore_ewmh_fullscreen all

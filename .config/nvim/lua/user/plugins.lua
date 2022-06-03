@@ -99,7 +99,7 @@ return packer.startup(function(use)
   -- use("spinks/vim-leader-guide")
 	-- Put this at the end after all plugins
   use({
-    "chentau/marks.nvim",
+    "chentoast/marks.nvim",
     config = function ()
       require'marks'.setup {}
     end

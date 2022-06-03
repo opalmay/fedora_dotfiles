@@ -3,11 +3,10 @@
 # Use neovim for vim if present.
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
 
-# Use $XINITRC variable if file exists.
-# [ -f "$XINITRC" ] && alias startx="startx $XINITRC"
+alias startx="startx $XINITRC"
 
 # sudo not required for some system commands
-for command in mount umount sv dnf updatedb su shutdown poweroff reboot ; do
+for command in mount umount sv dnf flatpak updatedb su shutdown poweroff reboot ; do
 	alias $command="sudo $command"
 done; unset command
 
@@ -24,22 +23,19 @@ alias \
   bat="batw" \
   less="lessw"
 
-# Colorize commands when possible.
 alias \
   ls="exa --icons" \
   l="ls -la" \
 	grep="rg" \
 	diff="diff --color=auto" \
-	ccat="highlight --out-format=ansi" \
 
 # These common commands are just too long! Abbreviate them.
 alias \
 	ka="killall" \
-	g="git" \
-	sdn="shutdown -h now" \
 	e="$EDITOR" \
 	v="$EDITOR" \
   oracle='gqlplus "dirxml/epumhbu@(DESCRIPTION=(LOAD_BALANCE=on) (ADDRESS=(PROTOCOL=TCP)(HOST= tlvx8m-scan1.nice.com) (PORT=1521)) (CONNECT_DATA=(SERVICE_NAME=oraprd)))"'
 
 alias \
 	lf="lfub" \
+  alias svn="svn --config-dir $XDG_CONFIG_HOME/subversion"

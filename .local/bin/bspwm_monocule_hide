@@ -1,5 +1,15 @@
-#/bin/bash
-for node_i in $(bspc query -N -n '.!focused.window' -d focused) 
-do
-    bspc node $node_i -g hidden
-done
+#!/bin/bash
+# bspc query -N -n focused > /tmp/focused
+# bspc subscribe node_stack | while read line
+# do
+  # echo $line
+  bspc node -f next.local
+  bspc node $(bspc query -N -n '.focused.window' -d focused) -g hidden=off
+  for node_i in $(bspc query -N -n '.!focused.window' -d focused)
+  do
+    bspc node $node_i -g hidden=on
+    # bspc node $(echo $line | awk '{print $4}') -g hidden=on
+  done
+  # bspc node $(echo $line | awk '{print $2}') -g hidden=off
+  # bspc query -N -n focused > /tmp/focused
+  # done

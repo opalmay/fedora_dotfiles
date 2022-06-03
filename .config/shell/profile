@@ -1,18 +1,12 @@
 #!/bin/zsh
-# profile file. Runs on login. Environmental variables are set here.
 
-# If you don't plan on reverting to bash, you can remove the link in ~/.profile
-# to clean up.
-
-# Adds `~/.local/bin` to $PATH
-export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}:/home/opal/.local/share/cargo/bin"
+export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}:/home/opal/.local/share/cargo/bin:/home/opal/.config/i3/scripts"
 
 unsetopt PROMPT_SP
 
-# Default programs:
 export EDITOR="nvim"
-export TERMINAL="alacritty"
-export BROWSER="brave"
+export TERMINAL="st"
+export BROWSER="brave-browser"
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -42,6 +36,15 @@ export WEECHAT_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/weechat"
 export MBSYNCRC="${XDG_CONFIG_HOME:-$HOME/.config}/mbsync/config"
 export ELECTRUMDIR="${XDG_DATA_HOME:-$HOME/.local/share}/electrum"
 
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+export XDG_STATE_HOME=$HOME/.local/state
+export ANDROID_HOME="$XDG_DATA_HOME"/android
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+export ICEAUTHORITY="$XDG_CACHE_HOME"/ICEauthority
+export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
+export XAUTHORITY="$XDG_RUNTIME_DIR"/xauthority
+export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
+
 # Other program settings:
 export DICS="/usr/share/stardict/dic/"
 export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
@@ -57,7 +60,7 @@ export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
 # export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
 export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
-export AWT_TOOLKIT=""	#May have to install wmname
+export AWT_TOOLKIT="MToolkit wmname LG3D"	#May have to install wmname
 export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
 export BAT_THEME="Nord"
 # This is the list for lf icons:
@@ -223,116 +226,5 @@ ex=:\
 *.pdf=:\
 *.nix=:\
 "
-# export LF_ICONS="di=📁:\
-# fi=📃:\
-# tw=🤝:\
-# ow=📂:\
-# ln=⛓:\
-# or=❌:\
-# ex=🎯:\
-# *.txt=✍:\
-# *.mom=✍:\
-# *.me=✍:\
-# *.ms=✍:\
-# *.png=🖼:\
-# *.webp=🖼:\
-# *.ico=🖼:\
-# *.jpg=📸:\
-# *.jpe=📸:
-# *.jpeg=📸:\
-# *.gif=🖼:\
-# *.svg=🗺:\
-# *.tif=🖼:\
-# *.tiff=🖼:\
-# *.xcf=🖌:\
-# *.html=🌎:\
-# *.xml=📰:\
-# *.gpg=🔒:\
-# *.css=🎨:\
-# *.pdf=📚:\
-# *.djvu=📚:\
-# *.epub=📚:\
-# *.csv=📓:\
-# *.xlsx=📓:\
-# *.tex=📜:\
-# *.md=📘:\
-# *.r=📊:\
-# *.R=📊:\
-# *.rmd=📊:\
-# *.Rmd=📊:\
-# *.m=📊:\
-# *.mp3=🎵:\
-# *.opus=🎵:\
-# *.ogg=🎵:\
-# *.m4a=🎵:\
-# *.flac=🎼:\
-# *.wav=🎼:\
-# *.mkv=🎥:\
-# *.mp4=🎥:\
-# *.webm=🎥:\
-# *.mpeg=🎥:\
-# *.avi=🎥:\
-# *.mov=🎥:\
-# *.mpg=🎥:\
-# *.wmv=🎥:\
-# *.m4b=🎥:\
-# *.flv=🎥:\
-# *.zip=📦:\
-# *.rar=📦:\
-# *.7z=📦:\
-# *.tar.gz=📦:\
-# *.z64=🎮:\
-# *.v64=🎮:\
-# *.n64=🎮:\
-# *.gba=🎮:\
-# *.nes=🎮:\
-# *.gdi=🎮:\
-# *.1=ℹ:\
-# *.nfo=ℹ:\
-# *.info=ℹ:\
-# *.log=📙:\
-# *.iso=📀:\
-# *.img=📀:\
-# *.bib=🎓:\
-# *.ged=👪:\
-# *.part=💔:\
-# *.torrent=🔽:\
-# *.jar=♨:\
-# *.java=♨:\
-# "
 
-# [ ! -f ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ] && shortcuts >/dev/null 2>&1 &
-
-# if pacman -Qs libxft-bgra >/dev/null 2>&1; then
-# 	# Start graphical server on user's current tty if not already running.
-# echo "1 - Plasma, 2 - Plasma + i3, 3 - i3"
-# $selection = read -n1 ans
-# case selection in
-#   PATTERN_1)
-#     ;;
-
-#   PATTERN_2)
-#     export KDEWM=/usr/bin/i3
-#     export DESKTOP_SESSION=plasma
-#     ;;
-
-#   PATTERN_N)
-#     STATEMENTS
-#     ;;
-
-#   *)
-#     STATEMENTS
-#     ;;
-# esac
-# export KDEWM=/usr/bin/i3
-# export DESKTOP_SESSION=plasma
-# [ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx > /dev/null 2>&1
-# else
-# 	echo "\033[31mIMPORTANT\033[0m: Note that \033[32m\`libxft-bgra\`\033[0m must be installed for this build of dwm.
-# Please run:
-# 	\033[32myay -S libxft-bgra-git\033[0m
-# and replace \`libxft\`. Afterwards, you may start the graphical server by running \`startx\`."
-# fi
-
-# Switch escape and caps if tty and no passwd required:
-# sudo -n loadkeys ${XDG_DATA_HOME:-$HOME/.local/share}/larbs/ttymaps.kmap 2>/dev/null
+[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx > /dev/null 2>&1

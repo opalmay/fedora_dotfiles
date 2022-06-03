@@ -139,4 +139,15 @@ bat1_format = %p %s
 # execp_interval = 10
 # execp_font = JetBrains Mono 12
 
+# Input indicator
+execp = new
+execp_command = xkb-switch
+execp_interval = 1
+execp_font = JetBrains Mono 10
+execp_padding = 0 0
+execp_font_color = #ECEFF4 100
+execp_background_id = 2
+execp_lclick_command = xkb-switch -n
+execp_centered = 1
+
 # End of config
