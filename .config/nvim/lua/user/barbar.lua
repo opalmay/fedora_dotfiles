@@ -1,5 +1,6 @@
 vim.g.bufferline = {
-  -- auto_hide = true
+  -- auto_hide = true,
+  animation = false,
   no_name_title = "New File"
 }
 
