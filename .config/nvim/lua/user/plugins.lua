@@ -66,16 +66,20 @@ return packer.startup(function(use)
 	use("lewis6991/gitsigns.nvim")
 	use("kyazdani42/nvim-web-devicons")
 	use("kyazdani42/nvim-tree.lua")
-	use("akinsho/bufferline.nvim")
-	use("moll/vim-bbye")
-	-- use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
-	-- use({
-	-- 	"chentau/live.nvim",
-	-- 	config = function()
-	-- 		require("live").setup()
-	-- 	end,
-	-- })
-	-- use({ "dstein64/vim-startuptime", cmd = "StartupTime" })
+	-- use("akinsho/bufferline.nvim")
+  use {
+    'romgrk/barbar.nvim',
+    requires = {'kyazdani42/nvim-web-devicons'}
+  }
+  use("moll/vim-bbye")
+  -- use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
+  -- use({
+  -- 	"chentau/live.nvim",
+  -- 	config = function()
+  -- 		require("live").setup()
+  -- 	end,
+  -- })
+  -- use({ "dstein64/vim-startuptime", cmd = "StartupTime" })
   use("tversteeg/registers.nvim")
   use {
     "ur4ltz/surround.nvim", -- sa/s in visual
@@ -83,28 +87,28 @@ return packer.startup(function(use)
       require"surround".setup {mappings_style = "sandwich"}
     end
   }
---   {
---   nestable = {
---     b = { "(", ")" },
---     s = { "[", "]" },
---     B = { "{", "}" },
---     a = { "<", ">" }
---     },
---   linear = {
---     q = { "'", "'" },
---     t = { "`", "`" },
---     d = { '"', '"' }
---   },
--- }
+  --   {
+  --   nestable = {
+  --     b = { "(", ")" },
+  --     s = { "[", "]" },
+  --     B = { "{", "}" },
+  --     a = { "<", ">" }
+  --     },
+  --   linear = {
+  --     q = { "'", "'" },
+  --     t = { "`", "`" },
+  --     d = { '"', '"' }
+  --   },
+  -- }
   -- use("spinks/vim-leader-guide")
-	-- Put this at the end after all plugins
+  -- Put this at the end after all plugins
   use({
     "chentoast/marks.nvim",
     config = function ()
       require'marks'.setup {}
     end
   })
-	if PACKER_BOOTSTRAP then
-		require("packer").sync()
-	end
+  if PACKER_BOOTSTRAP then
+    require("packer").sync()
+  end
 end)

@@ -18,7 +18,7 @@ export NOTMUCH_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/notmuch-config"
 export GTK2_RC_FILES="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-2.0/gtkrc-2.0"
 export LESSHISTFILE="-"
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
-export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
+# export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 #export ALSA_CONFIG_PATH="$XDG_CONFIG_HOME/alsa/asoundrc"
 #export GNUPGHOME="${XDG_DATA_HOME:-$HOME/.local/share}/gnupg"
@@ -227,4 +227,4 @@ ex=:\
 *.nix=:\
 "
 
-[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx > /dev/null 2>&1
+[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx $XINITRC > /dev/null 2>&1

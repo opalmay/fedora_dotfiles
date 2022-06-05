@@ -3,7 +3,7 @@
 # Use neovim for vim if present.
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
 
-alias startx="startx $XINITRC"
+# alias startx="startx $XINITRC"
 
 # sudo not required for some system commands
 for command in mount umount sv dnf flatpak updatedb su shutdown poweroff reboot ; do

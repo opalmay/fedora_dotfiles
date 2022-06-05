@@ -1,0 +1,29 @@
+#!/bin/sh
+function linear() {
+  echo "($X + $@) - ($W - 1) * $@" | bc
+}
+ 
+function binary() {
+  # echo "X: $X"
+  # echo "W: $W"
+  echo "($X * 2) / (2 * ($W -1))" | bc
+}
+ 
+function pitch() {
+  echo "$X * 0.25 / 0.282" | bc
+}
+ 
+function resolution() {
+  echo "$X * 1680 / 2560" | bc
+}
+ 
+bspc subscribe node_add node_remove | while read line; do
+  X=80
+  # [[ $(bspc query -M focused) = DP-1 ]] || X=$(pitch) # alternatively X=$(resolution)
+  W=$(bspc query -N -d focused | wc -l)
+  G=$(binary) # alternatively G=$(linear 10)
+  echo $G
+  [[ $G -lt 1 ]] && G=1
+  bspc config -m $(bspc query -M focused) window_gap $G
+  # conky-padding
+done

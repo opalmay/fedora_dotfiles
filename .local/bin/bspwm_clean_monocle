@@ -1,0 +1,22 @@
+#!/bin/bash
+
+bspc subscribe node_focus node_remove desktop_layout | while read event
+do
+  # echo $event
+  if [[ $(bspc query -T -d | jq -r .layout) == "monocle" ]]; then
+    if [[ $event = *"node_remove"* ]]; then
+      # sleep 0.1; xdotool keyup super; xdotool keydown alt key Tab; xdotool keyup alt
+      sleep 0.1; xdotool keydown super key Tab; xdotool keyup super
+    else
+      for node_i in $(bspc query -N -n '.!focused.window' -d focused)
+      do
+        bspc node $node_i -g hidden=on
+      done
+    fi
+  elif [[ $event = *"desktop_layout"* ]]; then
+    for node_i in $(bspc query -N -n '.!focused.window' -d focused)
+    do
+      bspc node $node_i -g hidden=off
+    done
+  fi
+done

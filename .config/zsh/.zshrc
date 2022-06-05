@@ -26,7 +26,7 @@ compinit
 _comp_options+=(globdots)		# Include hidden files.
 
 # vi mode
-# bindkey -v
+bindkey -v
 export KEYTIMEOUT=1
 
 # Use vim keys in tab complete menu:
@@ -81,6 +81,7 @@ source $PLUGINSDIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 
 source $PLUGINSDIR/zsh-fzf-history-search/zsh-fzf-history-search.zsh
 source $PLUGINSDIR/zsh-window-title/zsh-window-title.plugin.zsh
 source $PLUGINSDIR/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+# source $PLUGINSDIR/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 cd
 
 eval $(thefuck --alias)

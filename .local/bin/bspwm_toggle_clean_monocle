@@ -1,0 +1,25 @@
+#!/bin/bash
+
+bspc desktop -l next
+if [[ $(bspc query -T -d | jq -r .layout) == "tiled" ]]; then
+  for node_i in $(bspc query -N -n '.!focused.window' -d focused)
+  do
+    bspc node $node_i -g hidden=off
+  done
+  killall $(basename "$0")
+fi
+
+for node_i in $(bspc query -N -n '.!focused.window' -d focused)
+do
+  bspc node $node_i -g hidden=on
+done
+desktop=$(bspwm query -D focued)
+bspc subscribe node_focus | while read
+do
+  if [[ $desktop == $(bspwm query -D focued) ]]; then
+    for node_i in $(bspc query -N -n '.!focused.window' -d focused)
+    do
+      bspc node $node_i -g hidden=on
+    done
+  fi
+done

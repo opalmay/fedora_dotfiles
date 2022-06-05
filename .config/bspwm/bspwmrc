@@ -1,4 +1,5 @@
 #!/bin/sh
+
 echo $1 | tee /tmp/bspwmrestart
 # run every time bspwm restarts
 picom -b --config ~/.config/picom.conf --experimental-backends &
@@ -21,24 +22,20 @@ if [ ! -f $startup_lock_file ]; then
   nm-applet --indicator &
 	blueman-applet &
   pasystray &
-	# xfce4-power-manager &
 	ksuperkey &
-  easystroke &
+  # easystroke &
   # bspi_listen --config ~/.config/bspwm/bspi.ini &
-	# flashfocus &
-  # davmail &
   clipster -d &
   dunst &
   bspswallow &
-  # start_noise_canceling &
-  # xautolock -time 15 -locker "cmatrixlock-bspwm" -detectsleep &
   unclutter &
   # tint2 fix for fullscreen
   xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" $(xdo id -n tint2)
   xscreensaver --no-splash &
   bspwm_node_float &
+  bspwm_clean_monocle &
   kbdd &
-  alttab -bg "#4B4252" -fg "#ECEFF4" -frame "#597AA0" -font "xft:JetBrains Mono Nerd Font-10" -t 250x140 -i 250x64 -theme "Tela-dark" &
+  alttab -bg "#3B4252" -fg "#ECEFF4" -frame "#597AA0" -font "xft:JetBrains Mono Nerd Font-10" -t 250x140 -i 250x64 -theme "Tela-dark" -w 1 -mk Super_L &
 fi
 
 
@@ -50,20 +47,20 @@ while read monitor; do
 done <<< "$monitors"
 
 
-bspc config border_width                  4
 if [[ -z $(bspc query -M --names | grep -w DP-1) ]]; then
   echo "no DP-1"
-  window_gap=5
   # Set all to monocle
   bspc query -D | xargs -I {} bspc desktop {} -l monocle
 else
   echo "yes DP-1"
-  window_gap=15
   # Set all to tiling
   bspc query -D | xargs -I {} bspc desktop {} -l tiled
 fi
+bspc config window_gap                    10
+bspc config -m DP-1 window_gap            15
+
 bspc config single_monocle false
-bspc config window_gap                    $window_gap
+bspc config border_width                  4
 bspc config top_padding                   26
 bspc config bottom_padding                0
 bspc config left_padding                  0
@@ -78,6 +75,7 @@ bspc config focus_follows_pointer         true
 bspc config remove_unplugged_monitors     true
 bspc config remove_disabled_monitors      true
 bspc config merge_overlapping_monitors    true
+bspc config pointer_motion_interval       1
 # bspc config ignore_ewmh_fullscreen all
 
 bspc config pointer_modifier mod4
@@ -98,5 +96,5 @@ bspc rule -a Java state=floating
 bspc rule -a zoom state=floating
 bspc rule -a Galculator state=floating
 bspc rule -a "Apache Directory Studio" rectangle=1000x680+0+0 center=true
-bspc rule -a "brave-browser:*:*ServiceNow*" state=floating
+# bspc rule -a "brave-browser:*:*ServiceNow*" state=floating
 bspc rule -a "persepolis" state=floating
