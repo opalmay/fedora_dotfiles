@@ -33,27 +33,52 @@ workspace 20 output eDP-1
 
 # exec --no-startup-id autorandr -c && picom -b --config ~/.config/picom.conf --experimental-backends && feh --bg-fill ~/.local/wallpaper2.png
 # exec --no-startup-id autorandr -c | grep "already loaded" && sleep 1 && picom -b --config ~/.config/picom.conf --experimental-backends && feh --bg-fill ~/.local/wallpaper2.png && setxkbmap -option caps:escape
-exec --no-startup-id autorandr -c
-exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
-exec --no-startup-id feh --bg-fill ~/.local/wallpaper2.png
-exec --no-startup-id picom -b --config ~/.config/picom.conf --experimental-backends
-exec --no-startup-id setxkbmap -option caps:escape
-exec --no-startup-id nm-applet
-exec --no-startup-id blueman-applet
-exec --no-startup-id pasystray
-exec --no-startup-id xrdb ~/.Xresources
-exec --no-startup-id tint2
-exec --no-startup-id sxhkd
-exec --no-startup-id ksuperkey
-exec --no-startup-id easystroke
-exec --no-startup-id clipster -d
-exec --no-startup-id dunst
-exec --no-startup-id start_noise_canceling
+# exec --no-startup-id autorandr -c
+# exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
+# exec --no-startup-id feh --bg-fill ~/.local/wallpaper2.png
+# exec --no-startup-id picom -b --config ~/.config/picom.conf --experimental-backends
+# exec --no-startup-id setxkbmap -option caps:escape
+# exec --no-startup-id nm-applet
+# exec --no-startup-id blueman-applet
+# exec --no-startup-id pasystray
+# exec --no-startup-id xrdb ~/.Xresources
+# exec --no-startup-id tint2
+# exec --no-startup-id sxhkd -c ~/.config/sxhkd/sxhkdrc.i3
+# exec --no-startup-id ksuperkey
+# exec --no-startup-id easystroke
+# exec --no-startup-id clipster -d
+# exec --no-startup-id dunst
+# exec --no-startup-id start_noise_canceling
 exec --no-startup-id ~/.config/i3/scripts/alternating_layouts.py
-exec --no-startup-id xautolock -time 10 -locker "~/.local/bin/cmatrix-i3lock"
+# exec --no-startup-id xautolock -time 10 -locker "~/.local/bin/cmatrix-i3lock"
 
 for_window [class="Nm-connection-editor"] floating enable
 for_window [class="Apache Directory Studio" title="Properties.*"] resize set 1000
+
+# Kill the wallpaper window set by Plasma*
+for_window [title="Desktop — Plasma"] kill; floating enable; border none
+
+# Set Plasma dialogs and pop ups as floating so they won't get tiled
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [class="systemsettings"] floating enable
+for_window [class="plasmashell"] floating enable;
+for_window [class="Plasma"] floating enable; border none
+for_window [title="plasma-desktop"] floating enable; border none
+for_window [class="krunner"] floating enable; border none
+for_window [class="Kmix"] floating enable; border none
+for_window [class="Klipper"] floating enable; border none
+for_window [class="Plasmoidviewer"] floating enable; border none
+for_window [class="plasmashell" window_type="notification"] border none, move right 700px, move down 450px
+no_focus [class="plasmashell" window_type="notification"
+
+
+# Set the desktop background
+# exec --no-startup-id feh --bg-scale <PATH_TO_YOUR_WALLPAPER>
+
+# Start the compositor daemonizing it (-b) and enabling shadows (-c)
+# exec_always --no-startup-id picom -cb
+
 
 # Window color settings
     # class                 border  backgr. text    indicator

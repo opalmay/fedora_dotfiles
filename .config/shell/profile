@@ -1,12 +1,19 @@
 #!/bin/zsh
 
 export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}:/home/opal/.local/share/cargo/bin:/home/opal/.config/i3/scripts"
+export PATH="$PATH:\"\$NPM_PACKAGES/bin:\$PATH\""
 
 unsetopt PROMPT_SP
 
 export EDITOR="nvim"
 export TERMINAL="st"
 export BROWSER="brave-browser"
+
+# export PAGER="most"
+
+export NPM_PACKAGES="$HOME/.local/share/npm-packages"
+export prefix="$HOME/.npmrc"
+export NODE_PATH=\"\$NPM_PACKAGES/lib/node_modules:\$NODE_PATH\"
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"

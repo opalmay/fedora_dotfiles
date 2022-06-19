@@ -115,7 +115,7 @@ return packer.startup(function(use)
   }
   use {
     'goolord/alpha-nvim'
-}
+  }
   -- use("feline-nvim/feline.nvim")
 
   if PACKER_BOOTSTRAP then

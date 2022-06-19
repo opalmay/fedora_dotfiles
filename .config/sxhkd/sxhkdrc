@@ -5,6 +5,10 @@ super + Escape
 # BSPWM HOTKEYS
 # ~button1
 #   bspc query -D -d 'focused.!occupied' && rofi -modi drun -show drun -show-icons
+#
+
+super + shift + Home
+  systemctl suspend
 
 # quit/restart bspwm
 super + shift + r
@@ -182,9 +186,9 @@ super + Return
 super + b
   brave-browser
 
-# thunar
+# dolphin
 super + d
-	thunar
+  dolphin
 
 # lf
 super + r

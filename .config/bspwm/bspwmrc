@@ -1,15 +1,14 @@
 #!/bin/sh
 
-echo $1 | tee /tmp/bspwmrestart
 # run every time bspwm restarts
 picom -b --config ~/.config/picom.conf --experimental-backends &
 feh --bg-fill --no-fehbg ~/.local/wallpaper2.png &
-# run once
+#run once
 startup_lock_file=/tmp/bspwm-startup.lock
 if [ ! -f $startup_lock_file ]; then
-	touch $startup_lock_file
+  touch $startup_lock_file
   mkdir /tmp/opal
-
+  # latte-dock &
   setxkbmap -option caps:escape &
   tint2 &
 	autorandr --change &
@@ -17,7 +16,7 @@ if [ ! -f $startup_lock_file ]; then
   sxhkd &
 	xsetroot -cursor_name left_ptr &
   /usr/libexec/polkit-gnome-authentication-agent-1 &
-  xrdb ~/.config/x11/xresources
+  xrdb ~/.config/x11/xresources &
 	numlockx on &
   nm-applet --indicator &
 	blueman-applet &
@@ -26,18 +25,22 @@ if [ ! -f $startup_lock_file ]; then
   # easystroke &
   # bspi_listen --config ~/.config/bspwm/bspi.ini &
   clipster -d &
-  dunst &
+  # dunst &
+  deadd-notification-center &
   bspswallow &
   unclutter &
   # tint2 fix for fullscreen
-  xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" $(xdo id -n tint2)
+  # xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" $(xdo id -n tint2)
   xscreensaver --no-splash &
   bspwm_node_float &
-  bspwm_clean_monocle &
+  # bspwm_clean_monocle &
   kbdd &
-  alttab -bg "#3B4252" -fg "#ECEFF4" -frame "#597AA0" -font "xft:JetBrains Mono Nerd Font-10" -t 250x140 -i 250x64 -theme "Tela-dark" -w 1 -mk Super_L &
+  dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP="KDE" &
+  systemctl --user stop xdg-desktop-portal{,-gtk} &
+  pkill -f xdg-desktop-portal &
+  # killall xdg-desktop-portal && XDG_CURRENT_DESKTOP="KDE" /usr/libexec/xdg-desktop-portal-kde && XDG_CURRENT_DESKTOP="KDE" /usr/libexec/xdg-desktop-portal &
+  alttab -bg "#3B4252" -fg "#ECEFF4" -frame "#597AA0" -font "xft:JetBrains Mono Nerd Font Mono-10" -t 250x140 -i 250x64 -theme "Papirus-dark" -w 1 -mk Super_L &
 fi
-
 
 
 monitors=$(bspc query -M)
@@ -57,7 +60,7 @@ else
   bspc query -D | xargs -I {} bspc desktop {} -l tiled
 fi
 bspc config window_gap                    10
-bspc config -m DP-1 window_gap            15
+# bspc config -m DP-1 window_gap            15
 
 bspc config single_monocle false
 bspc config border_width                  4
@@ -72,10 +75,11 @@ bspc config borderless_monocle            false
 bspc config gapless_monocle               false
 bspc config focus_follows_pointer         true
 # bspc config pointer_follows_focus         true
-bspc config remove_unplugged_monitors     true
-bspc config remove_disabled_monitors      true
+bspc config remove_unplugged_monitors     false
+bspc config remove_disabled_monitors      false
 bspc config merge_overlapping_monitors    true
 bspc config pointer_motion_interval       1
+# bspc config hide_by_moving                true
 # bspc config ignore_ewmh_fullscreen all
 
 bspc config pointer_modifier mod4
@@ -94,7 +98,9 @@ bspc rule -r "*"
 bspc rule -a "*" center=true
 bspc rule -a Java state=floating
 bspc rule -a zoom state=floating
+bspc rule -a lattedock center=false state=floating border=off
 bspc rule -a Galculator state=floating
 bspc rule -a "Apache Directory Studio" rectangle=1000x680+0+0 center=true
+bspc rule -a "xdg-desktop-portal-kde" rectangle=1300x1000+0+0 center=true
 # bspc rule -a "brave-browser:*:*ServiceNow*" state=floating
 bspc rule -a "persepolis" state=floating
