@@ -27,6 +27,12 @@ map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
 map("n", "<C-l>", "<C-w>l")
 
+-- Resize windows
+map("n", "<leader>h", ":vert res -5<CR>")
+map("n", "<leader>j", ":res +5<CR>")
+map("n", "<leader>k", ":res -5<CR>")
+map("n", "<leader>l", ":vert res +5<CR>")
+
 -- map("n", "<leader>e", ":Lex 30<cr>")
 -- Nvimtree
 map("n", "<leader>e", ":NvimTreeToggle<CR>")

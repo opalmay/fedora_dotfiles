@@ -282,7 +282,7 @@ super +ctrl + Escape
   xkill
 
 XF86Calculator
-  galculator
+  kcalc
 
 super + shift + e
   bspwm_resize_16by9

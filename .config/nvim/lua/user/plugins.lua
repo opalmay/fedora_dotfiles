@@ -84,9 +84,11 @@ return packer.startup(function(use)
   use {
     "ur4ltz/surround.nvim", -- sa/s in visual
     config = function()
-      require"surround".setup {mappings_style = "sandwich"}
+      require"surround".setup { mappings_style = "sandwich", space_on_closing_char = "false" }
     end
   }
+  -- For surround repeat
+  use("tpope/vim-repeat")
   --   {
   --   nestable = {
   --     b = { "(", ")" },
