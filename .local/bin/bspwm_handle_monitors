@@ -1,0 +1,7 @@
+#!/bin/sh
+# tried to make something for handling monitor removal, but this triggers after the monitor has already been removed
+bspc subscribe monitor_remove | while read line
+do
+  removed_monitor=$(echo $line | awk '{print $2}')
+  bspc query -N -m $removed_monitor
+done

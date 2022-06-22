@@ -1,0 +1,55 @@
+#!/bin/sh
+
+cu(){ cut -d " " -f"$1"; }
+c(){ echo $(( ( ( $2 - $3 ) / 2 ) + $1 - $4)); }
+center(){
+
+  b=$(bspc config border_width)
+    s=$(wattr wh $1)
+    m=$(wattr xywh $(xdo id -a "$(bspc query -M -m --names)"))
+
+    x="$(c $(echo $m | cu 1 ) \
+      $(echo $m | cu 3 ) \
+      $(echo $s | cu 1 ) \
+      $b)"
+
+    y="$(c $(echo $m | cu 2 ) \
+      $(echo $m | cu 4 ) \
+      $(echo $s | cu 2 ) \
+      $b)"
+
+    wtp $x $y $(echo $s | cu 1 ) $(echo $s | cu 2 ) $1
+}
+
+bspc subscribe node_add | while read line
+do
+  start=`date +%s.%N`
+  id=$(echo "$line" | awk '{print $5}')
+  title=$(xdotool getwindowname "$id")
+  echo $id
+  echo $title
+  if [[ "$title" == "Untitled - Brave" ]]; then
+    bspc node $id -t floating
+  elif [[ "$title" == *"Properties for"* ]]; then
+    xdotool windowsize $id 1000 680
+  elif [[ "$title" == *"All Files — Portal"* ]]; then
+    xdotool windowsize $id 1300 1000 
+    # b=$(bspc config border_width)
+    # s=( $(wattr wh $id) )
+    # m=( $(getm $1) )
+    #
+    # x="$(c ${m[0]} ${m[2]} ${s[0]} $b)"
+    # y="$(c ${m[1]} ${m[3]} ${s[1]} $b)"
+    #
+    # wtp $x $y ${s[0]} ${s[1]} $id
+
+    # wid=$(echo "$(pfw)" | tr "a-z" "A-Z")
+    # bspc query -N -n "${wid}.floating" || exit
+    center $id
+
+  fi
+end=`date +%s.%N`
+
+runtime=$( echo "$end - $start" | bc -l )
+echo $runtime
+done

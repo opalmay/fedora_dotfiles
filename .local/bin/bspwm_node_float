@@ -1,18 +1,45 @@
-#!/bin/sh
+#!/bin/dash
+
+cu(){ cut -d " " -f"$1"; }
+c(){ echo $(( ( ( $2 - $3 ) / 2 ) + $1 - $4)); }
+center(){
+  b=$(bspc config border_width)
+  s=$(wattr wh $1)
+  m=$(wattr xywh $(xdo id -a "$(bspc query -M -m --names)"))
+
+  x="$(c $(echo $m | cu 1 ) \
+    $(echo $m | cu 3 ) \
+    $(echo $s | cu 1 ) \
+    $b)"
+
+  y="$(c $(echo $m | cu 2 ) \
+    $(echo $m | cu 4 ) \
+    $(echo $s | cu 2 ) \
+    $b)"
+
+  wtp $x $y $(echo $s | cu 1 ) $(echo $s | cu 2 ) $1
+}
+
+contains() {
+    string="$1"
+    substring="$2"
+    if test "${string#*$substring}" != "$string"
+    then
+        return 0    # $substring is in $string
+    else
+        return 1    # $substring is not in $string
+    fi
+}
 
 bspc subscribe node_add | while read line
 do
-  echo "$line" | awk '{print $5}'
   id=$(echo "$line" | awk '{print $5}')
-  # sleep 0.1
-  # notify-send $(xdotool getwindowname "$id")
   title=$(xdotool getwindowname "$id")
+  echo $id
   echo $title
-  #  || "$title" == *"iManager"* ]
-  if [[ "$title" == "Untitled - Brave" ]]; then
-    bspc node $id -t floating
-  fi
-  # if [[ "$title" == *"Properties for"* ]]; then
-    #todo add resize...
-  # fi
+
+  contains "$title" "Untitled - Brave" && bspc node $id -t floating
+  # contains "$title" "Properties for" && xdotool windowsize $id 1000 680 && center $id
+  # contains "$title" "All Files — Portal" && xdotool windowsize $id 1300 1000 && center $id
+  # contains "$title" "Overwrite File? — Portal" && xdotool windowsize $id 130 100 && center $id
 done

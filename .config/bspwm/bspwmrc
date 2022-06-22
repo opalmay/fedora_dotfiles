@@ -33,7 +33,6 @@ if [ ! -f $startup_lock_file ]; then
   # tint2 fix for fullscreen
   xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" $(xdo id -n tint2)
   xscreensaver --no-splash &
-  bspwm_node_float &
   # bspwm_clean_monocle &
   kbdd &
   dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP="KDE" &
@@ -60,6 +59,7 @@ if [[ -z $(bspc query -M --names | grep -w DP-1) ]]; then
 else
   echo "yes DP-1"
   # Set all to tiling
+
   bspc query -D | xargs -I {} bspc desktop {} -l tiled
   bspc config remove_unplugged_monitors     true
   bspc config remove_disabled_monitors      true
@@ -67,6 +67,7 @@ fi
 bspc config window_gap                    10
 # bspc config -m DP-1 window_gap            15
 
+bspc config external_rules_command ~/.local/bin/bspwm_external_rules
 bspc config single_monocle false
 bspc config border_width                  4
 bspc config top_padding                   26
@@ -74,10 +75,10 @@ bspc config bottom_padding                0
 bspc config left_padding                  0
 bspc config right_padding                 0
 bspc config split_ratio                   0.60
-bspc config borderless_monocle            true
-bspc config gapless_monocle               true
-# bspc config borderless_monocle            false
-# bspc config gapless_monocle               false
+# bspc config borderless_monocle            true
+# bspc config gapless_monocle               true
+bspc config borderless_monocle            false
+bspc config gapless_monocle               false
 bspc config focus_follows_pointer         true
 # bspc config pointer_follows_focus         true
 # bspc config remove_unplugged_monitors     false
@@ -106,7 +107,4 @@ bspc rule -a zoom state=floating
 bspc rule -a lattedock center=false state=floating border=off
 bspc rule -a Galculator state=floating
 bspc rule -a kcalc state=floating
-bspc rule -a "Apache Directory Studio" rectangle=1000x680+0+0 center=true
-bspc rule -a "xdg-desktop-portal-kde" rectangle=1300x1000+0+0 center=true
-# bspc rule -a "brave-browser:*:*ServiceNow*" state=floating
 bspc rule -a "persepolis" state=floating

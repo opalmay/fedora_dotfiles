@@ -1,12 +1,22 @@
 #!/bin/sh
-# if ["$2" = "tint2"]; then
-#   echo "layer=below"
-# fi
-# echo $1 > /tmp/id
-# notify-send test
-# id=$(vldotool getwindowname $1)
-title=$(xdotool getwindowname "$1")
-# echo $title
-# notify-send "\$1=$(printf '0x%08X' "$1") \$2=$2 \$3=$3" "$4"
-# notify-send $(xdotool getwindowname $1)
-notify-send $title
+
+window_id="$1"
+# window_class="$2"
+# window_instance="$3"
+# consequences="$4"
+window_title="$(xwininfo -id "$window_id" | sed ' /^xwininfo/!d ; s,.*"\(.*\)".*,\1,')"
+
+case "$window_title" in
+	*"All Files — Portal"*)
+    echo "rectangle=1300x1000+0+0"
+		;;
+  *"Untitled - Brave"*)
+    echo "state=floating"
+		;;
+  *"Properties for"*)
+    echo "rectangle=1000x680+0+0"
+		;;
+	*)
+		# echo "Nothing found..."
+		;;
+esac
