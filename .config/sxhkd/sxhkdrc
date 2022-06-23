@@ -8,7 +8,7 @@ super + Escape
 #
 
 super + shift + Home
-  systemctl suspend
+  notify-send suspending... && systemctl suspend
 
 # quit/restart bspwm
 super + shift + r

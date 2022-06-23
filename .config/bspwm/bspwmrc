@@ -30,8 +30,6 @@ if [ ! -f $startup_lock_file ]; then
   # dunst &
   bspswallow &
   unclutter &
-  # tint2 fix for fullscreen
-  xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" $(xdo id -n tint2)
   xscreensaver --no-splash &
   # bspwm_clean_monocle &
   kbdd &
