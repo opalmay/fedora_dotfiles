@@ -1,0 +1,126 @@
+MenuBar=Disabled
+
+[CompactMode]
+FontWeight=50
+
+[DetailsMode]
+FontWeight=50
+
+[General]
+ConfirmClosingMultipleTabs=false
+RememberOpenedTabs=false
+Version=201
+ViewPropsTimestamp=2022,5,26,19,56,48.234
+
+[IconsMode]
+FontWeight=50
+PreviewSize=144
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=32
+
+[KPropertiesDialog]
+DP-1 eDP-1 HDMI-1 Height 3440x1440=680
+DP-1 eDP-1 HDMI-1 Width 3440x1440=1000
+DP-2-1 DP-2-3 Height 1680x1050=601
+DP-2-1 DP-2-3 Height 1920x1080=601
+DP-2-1 DP-2-3 Width 1680x1050=545
+DP-2-1 DP-2-3 Width 1920x1080=545
+
+[MainWindow]
+DP-1 HDMI-1 Height 2560x1080=1026
+DP-1 HDMI-1 Height 3440x1440=1386
+DP-1 HDMI-1 Width 2560x1080=2532
+DP-1 HDMI-1 Width 3440x1440=1354
+DP-1 HDMI-1 XPosition 2560x1080=4733
+DP-1 HDMI-1 XPosition 3440x1440=13
+DP-1 HDMI-1 YPosition 2560x1080=194
+DP-1 HDMI-1 YPosition 3440x1440=42
+DP-1 HDMI-1 eDP-1 XPosition 3440x1440=3992
+DP-1 HDMI-1 eDP-1 YPosition 3440x1440=40
+DP-1 Height 3440x1440=1384
+DP-1 Width 3440x1440=1704
+DP-1 eDP-1 DP-2-9 Height 2048x864=838
+DP-1 eDP-1 DP-2-9 Height 2752x1152=518
+DP-1 eDP-1 DP-2-9 Width 2048x864=2030
+DP-1 eDP-1 DP-2-9 Width 2752x1152=1362
+DP-1 eDP-1 DP-2-9 XPosition 2752x1152=1933
+DP-1 eDP-1 DP-2-9 YPosition 2752x1152=13
+DP-1 eDP-1 HDMI-1 Height 1920x1080=1022
+DP-1 eDP-1 HDMI-1 Height 2048x864=842
+DP-1 eDP-1 HDMI-1 Height 2293x960=923
+DP-1 eDP-1 HDMI-1 Height 2560x1080=1022
+DP-1 eDP-1 HDMI-1 Height 2752x1152=546
+DP-1 eDP-1 HDMI-1 Height 3440x1440=822
+DP-1 eDP-1 HDMI-1 Width 1920x1080=1892
+DP-1 eDP-1 HDMI-1 Width 2048x864=2035
+DP-1 eDP-1 HDMI-1 Width 2293x960=1140
+DP-1 eDP-1 HDMI-1 Width 2560x1080=1512
+DP-1 eDP-1 HDMI-1 Width 2752x1152=1131
+DP-1 eDP-1 HDMI-1 Width 3440x1440=1216
+DP-1 eDP-1 HDMI-1 XPosition 1920x1080=14
+DP-1 eDP-1 HDMI-1 XPosition 2048x864=6394
+DP-1 eDP-1 HDMI-1 XPosition 2293x960=1927
+DP-1 eDP-1 HDMI-1 XPosition 2560x1080=5374
+DP-1 eDP-1 HDMI-1 XPosition 2752x1152=3538
+DP-1 eDP-1 HDMI-1 XPosition 3440x1440=1934
+DP-1 eDP-1 HDMI-1 YPosition 1920x1080=224
+DP-1 eDP-1 HDMI-1 YPosition 2048x864=762
+DP-1 eDP-1 HDMI-1 YPosition 2293x960=31
+DP-1 eDP-1 HDMI-1 YPosition 2560x1080=224
+DP-1 eDP-1 HDMI-1 YPosition 2752x1152=594
+DP-1 eDP-1 HDMI-1 YPosition 3440x1440=44
+DP-1 eDP-1 Height 1536x864=832
+DP-1 eDP-1 Height 1920x1080=708
+DP-1 eDP-1 Height 2752x1152=546
+DP-1 eDP-1 Height 3440x1440=1376
+DP-1 eDP-1 Width 1536x864=1536
+DP-1 eDP-1 Width 1920x1080=59
+DP-1 eDP-1 Width 2752x1152=1363
+DP-1 eDP-1 Width 3440x1440=3402
+DP-1 eDP-1 Window-Maximized 1536x864=true
+DP-1 eDP-1 XPosition 1536x864=0
+DP-1 eDP-1 XPosition 2752x1152=1930
+DP-1 eDP-1 XPosition 3440x1440=1939
+DP-1 eDP-1 YPosition 1536x864=0
+DP-1 eDP-1 YPosition 2752x1152=594
+DP-1 eDP-1 YPosition 3440x1440=45
+DP-2-1 DP-2-3 Height 1680x1050=1050
+DP-2-1 DP-2-3 Height 1920x1080=1022
+DP-2-1 DP-2-3 Width 1680x1050=1680
+DP-2-1 DP-2-3 Width 1920x1080=1892
+DP-2-1 DP-2-3 XPosition 1680x1050=1920
+DP-2-1 DP-2-3 XPosition 1920x1080=0
+DP-2-1 DP-2-3 YPosition 1680x1050=30
+DP-2-1 DP-2-3 YPosition 1920x1080=30
+MenuBar=Disabled
+ToolBarsMovable=Disabled
+eDP-1 DP-1 DP-2-9 Height 3440x1440=623
+eDP-1 DP-1 DP-2-9 Width 3440x1440=760
+eDP-1 DP-1 DP-2-9 Window-Maximized 3440x1440=true
+eDP-1 DP-1 DP-2-9 XPosition 1920x1080=0
+eDP-1 DP-1 DP-2-9 XPosition 3440x1440=3260
+eDP-1 DP-1 DP-2-9 YPosition 1920x1080=0
+eDP-1 DP-1 DP-2-9 YPosition 3440x1440=420
+eDP-1 DP-1 Height 1920x1080=1032
+eDP-1 DP-1 Width 1920x1080=1904
+eDP-1 DP-1 XPosition 1920x1080=13
+eDP-1 DP-1 YPosition 1920x1080=38
+eDP-1 HDMI-1 Height 1920x1080=1026
+eDP-1 HDMI-1 Height 2560x1080=1022
+eDP-1 HDMI-1 Width 1920x1080=1892
+eDP-1 HDMI-1 Width 2560x1080=2532
+eDP-1 Height 1536x864=963
+eDP-1 Height 1920x1080=1022
+eDP-1 Width 1536x864=1536
+eDP-1 Width 1920x1080=1892
+eDP-1 Window-Maximized 1536x864=true
+eDP-1 XPosition 1920x1080=1160
+eDP-1 YPosition 1920x1080=40
+
+[PlacesPanel]
+IconSize=32
+
+[PreviewSettings]
+Plugins=audiothumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,svgthumbnail
