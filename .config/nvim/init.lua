@@ -1,3 +1,5 @@
+require("impatient")
+
 require("user.options")
 require("user.keymaps")
 require("user.plugins")
@@ -9,7 +11,6 @@ require("user.autopairs")
 require("user.comment")
 require("user.gitsigns")
 require("user.nvim-tree")
--- require("user.bufferline")
 require("user.barbar")
 require("user.lualine")
 require("user.alpha")

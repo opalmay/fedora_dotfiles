@@ -22,6 +22,7 @@ packer.init({
 })
 
 return packer.startup(function(use)
+  use("lewis6991/impatient.nvim")
   use("wbthomason/packer.nvim") -- Have packer manage itself
   --use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
@@ -56,7 +57,7 @@ return packer.startup(function(use)
   use({
     "karb94/neoscroll.nvim",
     config = function()
-      require("neoscroll").setup({easing_function = "cubic"})
+      require("neoscroll").setup({ easing_function = "cubic" })
     end,
   })
 
@@ -66,13 +67,12 @@ return packer.startup(function(use)
   use("lewis6991/gitsigns.nvim")
   use("kyazdani42/nvim-web-devicons")
   use("kyazdani42/nvim-tree.lua")
-  -- use("akinsho/bufferline.nvim")
-  use {
-    'romgrk/barbar.nvim',
-    requires = {'kyazdani42/nvim-web-devicons'}
-  }
+  use({
+    "romgrk/barbar.nvim",
+    requires = { "kyazdani42/nvim-web-devicons" },
+  })
   use("moll/vim-bbye")
-  -- use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
+  use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
   -- use({
   -- 	"chentau/live.nvim",
   -- 	config = function()
@@ -81,12 +81,12 @@ return packer.startup(function(use)
   -- })
   -- use({ "dstein64/vim-startuptime", cmd = "StartupTime" })
   use("tversteeg/registers.nvim")
-  use {
+  use({
     "ur4ltz/surround.nvim", -- sa/s in visual
     config = function()
-      require"surround".setup { mappings_style = "sandwich", space_on_closing_char = "false" }
-    end
-  }
+      require("surround").setup({ mappings_style = "sandwich", space_on_closing_char = "false" })
+    end,
+  })
   -- For surround repeat
   use("tpope/vim-repeat")
   --   {
@@ -106,20 +106,51 @@ return packer.startup(function(use)
   -- Put this at the end after all plugins
   use({
     "chentoast/marks.nvim",
-    config = function ()
-      require'marks'.setup {}
-    end
+    config = function()
+      require("marks").setup({})
+    end,
   })
   use("lukas-reineke/indent-blankline.nvim")
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  }
-  use {
-    'goolord/alpha-nvim'
-  }
+  use({
+    "nvim-lualine/lualine.nvim",
+    requires = { "kyazdani42/nvim-web-devicons", opt = true },
+  })
+  use({
+    "goolord/alpha-nvim",
+  })
   -- use("feline-nvim/feline.nvim")
-
+  -- use {
+  --   "PHSix/faster.nvim",
+  --   event = {"VimEnter *"},
+  --   config = function()
+  --     vim.api.nvim_set_keymap('n', 'j', '<Plug>(faster_move_j)', {noremap=false, silent=true})
+  --     vim.api.nvim_set_keymap('n', 'k', '<Plug>(faster_move_k)', {noremap=false, silent=true})
+  --     -- or
+  --     -- vim.api.nvim_set_keymap('n', 'j', '<Plug>(faster_move_gj)', {noremap=false, silent=true})
+  --     -- vim.api.nvim_set_keymap('n', 'k', '<Plug>(faster_move_gk)', {noremap=false, silent=true})
+  --     -- if you need map in visual mode
+  --     -- vim.api.nvim_set_keymap('v', 'j', '<Plug>(faster_vmove_j)', {noremap=false, silent=true})
+  --     -- vim.api.nvim_set_keymap('v', 'k', '<Plug>(faster_vmove_k)', {noremap=false, silent=true})
+  --   end
+  -- }
+  use({
+    "akinsho/toggleterm.nvim",
+    tag = "v1.*",
+    config = function()
+      require("toggleterm").setup()
+    end,
+  })
+  use({
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup({
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      })
+    end,
+  })
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end

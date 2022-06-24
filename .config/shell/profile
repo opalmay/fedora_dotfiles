@@ -15,6 +15,10 @@ export NPM_PACKAGES="$HOME/.local/share/npm-packages"
 export prefix="$HOME/.npmrc"
 export NODE_PATH=\"\$NPM_PACKAGES/lib/node_modules:\$NODE_PATH\"
 
+
+export DENO_INSTALL="/home/opal/.local/share/deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"

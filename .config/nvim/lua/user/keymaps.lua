@@ -2,9 +2,9 @@
 
 -- Shorten function name
 -- local map = vim.api.nvim_set_keymap
-local map = function (mode,bind,action)
+local map = function(mode, bind, action)
   local opts = { noremap = true, silent = true }
-  vim.api.nvim_set_keymap(mode,bind,action,opts)
+  vim.api.nvim_set_keymap(mode, bind, action, opts)
 end
 
 --Remap space as leader key
@@ -56,7 +56,7 @@ map("n", "N", "Nzzzv")
 map("n", "<leader>q", ":Bdelete<CR>")
 map("n", "<leader>/", "gcc")
 -- Replace all occurrences of a word
-map("n", "<leader>r", ':%s/\\<<C-r><C-w>\\>/')
+map("n", "<leader>r", ":%s/\\<<C-r><C-w>\\>/")
 -- map("n", "U", '/<C-r><C-w><CR>')
 
 -- Close current buffer
@@ -95,6 +95,8 @@ map("x", "K", ":move '<-2<CR>gv=gv")
 
 map("n", "<leader>f", "<cmd>Telescope find_files<cr>")
 map("n", "<c-t>", "<cmd>Telescope live_grep<cr>")
+
+map("n", "<leader>t", ":TroubleToggle<CR>")
 -- map("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown())<cr>")
 -- map("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>")
 
