@@ -1,0 +1,21 @@
+[Unit]
+Description=OneDrive SharePoint (rclone)
+AssertPathIsDirectory=/mnt/ITCorporateSystemTeam
+# Make sure we have network enabled
+After=network.target
+
+[Service]
+Type=simple
+
+ExecStart=/usr/bin/rclone mount --vfs-cache-mode full ITCorporate: /mnt/ITCorporateSystemTeam
+
+# Perform lazy unmount
+ExecStop=/usr/bin/fusermount -zu /mnt/ITCorporateSystemTeam
+
+# Restart the service whenever rclone exists with non-zero exit code
+Restart=on-failure
+RestartSec=15
+
+[Install]
+# Autostart after reboot
+WantedBy=default.target
