@@ -19,7 +19,7 @@ TRACK=$(playerctl metadata title)
 if [ contains "$TRACK" "Microsoft Teams" ]; then
   exit
 fi
-
+TRACK=$(echo "$TRACK" | xargs | cut -d " " -f -3)
 if [ "$STATUS" = "" ] || [ "$TRACK" = "" ]; then
   exit 
 elif [ "$STATUS" = "Playing" ]; then
