@@ -44,6 +44,7 @@ return packer.startup(function(use)
   -- LSP
   use("neovim/nvim-lspconfig")
   use("williamboman/nvim-lsp-installer")
+  use("tamago324/nlsp-settings.nvim")
 
   use("nvim-telescope/telescope.nvim")
 
@@ -80,7 +81,8 @@ return packer.startup(function(use)
   -- 	end,
   -- })
   -- use({ "dstein64/vim-startuptime", cmd = "StartupTime" })
-  use("tversteeg/registers.nvim")
+  -- use("tversteeg/registers.nvim")
+  use("junegunn/vim-peekaboo")
   use({
     "ur4ltz/surround.nvim", -- sa/s in visual
     config = function()
@@ -133,24 +135,39 @@ return packer.startup(function(use)
   --     -- vim.api.nvim_set_keymap('v', 'k', '<Plug>(faster_vmove_k)', {noremap=false, silent=true})
   --   end
   -- }
+  -- use({
+  --   "akinsho/toggleterm.nvim",
+  --   tag = "v1.*",
+  --   config = function()
+  --     require("toggleterm").setup()
+  --   end,
+  -- })
+  -- use({
+  --   "folke/trouble.nvim",
+  --   requires = "kyazdani42/nvim-web-devicons",
+  --   config = function()
+  --     require("trouble").setup({
+  --       -- your configuration comes here
+  --       -- or leave it empty to use the default settings
+  --       -- refer to the configuration section below
+  --     })
+  --   end,
+  -- })
   use({
-    "akinsho/toggleterm.nvim",
-    tag = "v1.*",
+    "phaazon/hop.nvim",
+    -- branch = "v1", -- optional but strongly recommended
     config = function()
-      require("toggleterm").setup()
+      -- you can configure Hop the way you like here; see :h hop-config
+      require("hop").setup()
     end,
   })
-  use({
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("trouble").setup({
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      })
-    end,
-  })
+  -- use("unblevable/quick-scope")
+  use("RRethy/vim-illuminate")
+  -- use("mg979/vim-visual-multi")
+  -- vim.g.Illuminate_ftHighlightGroups = {
+  --     vim:blacklist = ['vimString']
+  --     }
+  vim.g.qs_delay = 1
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end

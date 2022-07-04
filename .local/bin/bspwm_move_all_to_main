@@ -1,0 +1,16 @@
+#!/bin/sh
+
+target_monitor=$(xrandr | grep "primary" | awk '{print $1}')
+current_monitors=$(xrandr | grep " connected" | awk '{print $1}')
+desktops=$(bspc query -D -d '.occupied')
+
+while read desktop; do
+  monitor=$(bspc query -M -d $desktop --names)
+  if [[ -n $(echo $current_monitors | grep -w $monitor) ]]; then
+    index=$(bspc query -D -d $desktop --names)
+    nodes=$(bspc query -N -d $desktop)
+    while read node; do
+      bspc node $node -d $(bspc query -D -m $target_monitor | sed "${index}q;d")
+    done <<< "$nodes"
+  fi
+done <<< "$desktops"

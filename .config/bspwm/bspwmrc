@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # run every time bspwm restarts
-picom -b --config ~/.config/picom.conf --experimental-backends &
+# picom -b --config ~/.config/picom.conf --experimental-backends &
 feh --bg-fill --no-fehbg ~/.local/wallpaper2.png &
 killall deadd-notification-center; deadd-notification-center &
 
@@ -32,37 +32,32 @@ if [ ! -f $startup_lock_file ]; then
   # dunst &
   bspswallow &
   unclutter &
-  xscreensaver --no-splash &
+  /usr/libexec/kdeconnectd &
   # bspwm_clean_monocle &
   kbdd &
-  dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP="KDE" &
-  systemctl --user stop xdg-desktop-portal{,-gtk} &
-  pkill -f xdg-desktop-portal &
-  # killall xdg-desktop-portal && XDG_CURRENT_DESKTOP="KDE" /usr/libexec/xdg-desktop-portal-kde && XDG_CURRENT_DESKTOP="KDE" /usr/libexec/xdg-desktop-portal &
+  playerctld &
+  spotblock &
   alttab -bg "#3B4252" -fg "#ECEFF4" -frame "#597AA0" -font "xft:JetBrains Mono Nerd Font Mono-10" -t 250x140 -i 250x64 -theme "Papirus-dark" -w 1 -mk Super_L &
+  # xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" $(xdo id -n tint2)
 fi
 
 
 monitors=$(bspc query -M)
-echo "$monitors" > /tmp/monitors
 while read monitor; do
-  bspc monitor "$monitor" -d 1 2 3 4 5 6 7 8 9
+  bspc monitor "$monitor" -d 1 2 3 4 5 6 7 8 9 10 11 12
 done <<< "$monitors"
 
+bspc config remove_unplugged_monitors     false
+bspc config remove_disabled_monitors      false
 
 if [[ -z $(bspc query -M --names | grep -w DP-1) ]]; then
-  echo "no DP-1"
   # Set all to monocle
   bspc query -D | xargs -I {} bspc desktop {} -l monocle
-  bspc config remove_unplugged_monitors     false
-  bspc config remove_disabled_monitors      false
+  pidof xscreensaver || xscreensaver --no-splash &
 else
-  echo "yes DP-1"
   # Set all to tiling
-
   bspc query -D | xargs -I {} bspc desktop {} -l tiled
-  bspc config remove_unplugged_monitors     true
-  bspc config remove_disabled_monitors      true
+  killall xscreensaver
 fi
 bspc config window_gap                    10
 # bspc config -m DP-1 window_gap            15

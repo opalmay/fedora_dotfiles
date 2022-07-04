@@ -1,0 +1,24 @@
+#!/bin/sh
+
+target_monitor=$(xrandr | grep "primary" | awk '{print $1}')
+current_monitors=$(xrandr | grep " connected" | awk '{print $1}')
+monitors=$(bspc query -M --names)
+
+while read monitor; do
+  if [[ -z $(echo $current_monitors | grep -w $monitor) ]]; then
+    desktops=$(bspc query -D -m $monitor -d '.occupied')
+
+    while read desktop; do
+      index=$(bspc query -D -d $desktop --names)
+      nodes=$(bspc query -N -d $desktop)
+
+      while read node; do
+        bspc node $node -d $(bspc query -D -m $target_monitor | sed "${index}q;d")
+      done <<< "$nodes"
+    done <<< "$desktops"
+
+    bspc monitor "$monitor" -r
+  fi
+done <<< "$monitors"
+
+bspc wm --adopt-orphans

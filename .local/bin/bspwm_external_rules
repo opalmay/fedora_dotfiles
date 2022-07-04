@@ -13,6 +13,9 @@ case "$window_title" in
   *"Untitled - Brave"*)
     echo "state=floating"
 		;;
+  *"is sharing"*)
+    echo "hidden=on"
+		;;
   *"Properties for"*)
     echo "rectangle=1000x680+0+0"
 		;;

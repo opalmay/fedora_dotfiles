@@ -1,0 +1,19 @@
+#!/bin/sh
+
+bspc subscribe node_state | while read line
+do
+  echo $line
+  if [[ "$line" == *"fullscreen on"* ]]; then
+    # for node_i in $(bspc query -N -n '.!focused.window' -d)
+    #   do
+    #     bspc node $node_i -g hidden=on
+    #   done
+    killall tint2
+  elif [[ "$line" == *"fullscreen off"* ]]; then
+    # for node_i in $(bspc query -N -n '.!focused.window' -d)
+    #   do
+    #     bspc node $node_i -g hidden=off
+    #   done
+    tint2 & disown
+  fi
+done

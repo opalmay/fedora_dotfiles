@@ -99,4 +99,9 @@ cd
 
 eval $(thefuck --alias)
 
+if [[ $1 == eval ]]
+then
+  "$@"
+set --
+fi
 # precmd () {print -Pn "\e]0;%~\a"}

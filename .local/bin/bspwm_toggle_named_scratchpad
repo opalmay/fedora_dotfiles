@@ -1,0 +1,26 @@
+#!/bin/sh
+
+name=$1
+
+i=$(bspc query -N -n "focused.floating")
+if [ -n "$i" ]; then
+  xprop -id $i -f _SCRATCH 8s -set _SCRATCH $name
+  xdotool windowunmap $i
+else
+  i=$(for w in $(xwininfo -root -children | grep -e "^\s*0x[0-9a-f]+" -o); do
+    t=$(xprop -id $w _SCRATCH | grep ' = (.*)')
+    scratch_name=$(echo "$t" | cut -d"\"" -f2)
+    # if [ "$scratch_name" = "$name" ]; then
+      notify-send $scratch_name
+      echo $t $w
+    # fi
+  done|sort -n|head -n1|cut -d" " -f 5)
+  notify-send $i a
+  if [ -n "$i" ]; then
+    notify-send $i
+    xprop -id $i -remove _SCRATCH
+    bspc rule -a \* state=floating center=on --one-shot
+    xdotool windowmap $i
+    bspc node -f $i
+  fi
+fi

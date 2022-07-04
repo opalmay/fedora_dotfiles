@@ -28,10 +28,10 @@ map("n", "<C-k>", "<C-w>k")
 map("n", "<C-l>", "<C-w>l")
 
 -- Resize windows
-map("n", "<leader>h", ":vert res -5<CR>")
-map("n", "<leader>j", ":res +5<CR>")
-map("n", "<leader>k", ":res -5<CR>")
-map("n", "<leader>l", ":vert res +5<CR>")
+map("n", "<Left>", ":vert res -5<CR>")
+map("n", "<Down>", ":res +5<CR>")
+map("n", "<Up>", ":res -5<CR>")
+map("n", "<Right>", ":vert res +5<CR>")
 
 -- map("n", "<leader>e", ":Lex 30<cr>")
 -- Nvimtree
@@ -96,11 +96,21 @@ map("x", "K", ":move '<-2<CR>gv=gv")
 map("n", "<leader>f", "<cmd>Telescope find_files<cr>")
 map("n", "<c-t>", "<cmd>Telescope live_grep<cr>")
 
-map("n", "<leader>t", ":TroubleToggle<CR>")
--- map("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown())<cr>")
--- map("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>")
+-- map("n", "<leader>t", ":TroubleToggle<CR>")
+-- map("n", "<leader>t", ":ToggleTerm<CR>")
+map("n", "<leader>t", ':silent !bspc rule -a St state=floating -o && st -e zsh -is eval "cd $(pwd)" & <CR>')
 
--- map("n", "<leader>", ":<c-u>LeaderGuide '<space>'<CR>")
--- let mapleader = '\<Space>'
--- nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
--- vnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
+-- Set up `f` as general hop hotkey to hint character
+map("n", "s", ":HopWord<CR>")
+map("n", "z", ":HopChar1<CR>")
+-- map("n", "t", "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR })<cr>")
+-- map("n", "T", "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR })<cr>")
+map("n", "S", ":HopLine<CR>")
+-- Set up actions in normal mode
+local actions = { "d", "c", "<", ">", "y" }
+for _, a in ipairs(actions) do
+  map("n", a .. "s", a .. ":HopWord<CR>")
+  map("n", a .. "z", a .. ":HopChar1<CR>")
+  map("n", a .. "S", a .. ":HopLine<CR>")
+  -- map("n", a .. "L", a .. "<cmd>lua require'hop'.hint_char1()<cr>")
+end

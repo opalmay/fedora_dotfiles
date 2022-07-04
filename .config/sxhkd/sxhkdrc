@@ -72,8 +72,8 @@ super + shift + f
 	bspc node $node_i -g hidden; \
 	done
 
-super + e
-  bspc node focused -t tiled
+# super + e
+#   bspc node focused -t tiled
 
 # toggle floating and show on all desktops
 super + {_,shift + } s
@@ -141,6 +141,12 @@ super + {o,i}
 super + {_,ctrl + }{1-9,0}
 	bspc {desktop -f,node -d} focused:'^{1-9,10}'
 
+# use left hand for further desktops
+super + e; super + {1-6}
+  d=$(expr {1-6} + 6);\
+  bspc desktop -f focused:"^$d"
+  # bspc desktop -f focused:"^{7-10}"
+
 # send to desktop and follow
 super + shift + {1-9,0}
 	bspc node -d focused:'^{1-9,10}' --follow
@@ -164,7 +170,9 @@ super + {u,n}
 
 # expand/contract a window 
 super + ctrl + {h,j,k,l}
-  bspwm_resize {left,down,up,right} 50
+  delta=50; \
+  { bspc node -z right -$delta 0; bspc node -z left +$delta 0, bspc node -z top 0 -$delta; bspc node -z bottom 0 +$delta, bspc node -z top 0 +$delta; bspc node -z bottom 0 -$delta, bspc node -z right +$delta 0; bspc node -z left -$delta 0 }
+# bspwm_resize {left,down,up,right} 50
 
 # move a floating window
 super + {Left,Down,Up,Right}
@@ -182,9 +190,11 @@ super + {ctrl, shift} + g
 super + Return
 	st
 
+super + shift + Return
+	bspc rule -a St state=floating -o && st
 # browser
 super + b
-  brave-browser
+  brave-browser --enable-features=VaapiVideoDecoder --disable-features=UseChromeOSDirectVideoDecoder
 
 # dolphin
 super + d
@@ -240,6 +250,8 @@ super + w
 			bspc node -f $i;\
 		fi;\
 	fi
+# super + shift + t
+#   bspwm_toggle_named_scratchpad teams2
 super + shift + w
 	id=$(bspc query -N -n "focused");\
 	if [ -n "$id" ];then \
@@ -259,6 +271,7 @@ XF86MonBrightness{Up,Down}
 # lock screen
 super + shift + equal
   xscreensaver-command -lock
+  # (pidof xscreensaver || xscreensaver --no-splash) && sleep 0.5 && xscreensaver-command -lock
   # cmatrixlock-bspwm
 
 super + v
