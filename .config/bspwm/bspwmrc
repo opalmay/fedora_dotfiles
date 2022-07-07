@@ -35,7 +35,7 @@ if [ ! -f $startup_lock_file ]; then
   /usr/libexec/kdeconnectd &
   # bspwm_clean_monocle &
   kbdd &
-  playerctld &
+  playerctld daemon &
   spotblock &
   alttab -bg "#3B4252" -fg "#ECEFF4" -frame "#597AA0" -font "xft:JetBrains Mono Nerd Font Mono-10" -t 250x140 -i 250x64 -theme "Papirus-dark" -w 1 -mk Super_L &
   # xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" $(xdo id -n tint2)

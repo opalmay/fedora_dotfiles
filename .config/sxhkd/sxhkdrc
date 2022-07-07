@@ -11,7 +11,7 @@ super + shift + Home
   notify-send suspending... && systemctl suspend
 
 # quit/restart bspwm
-super + shift + r
+super + shift + ctrl + r
 	bspc wm -r
 super + shift + p
   bspc quit
@@ -151,6 +151,10 @@ super + e; super + {1-6}
 super + shift + {1-9,0}
 	bspc node -d focused:'^{1-9,10}' --follow
 
+super + shift + e; super + shift + {1-6}
+  d=$(expr {1-6} + 6);\
+  bspc node -d focused:"^$d" --follow
+
 
 # PRESELECT
 
@@ -170,9 +174,9 @@ super + {u,n}
 
 # expand/contract a window 
 super + ctrl + {h,j,k,l}
-  delta=50; \
-  { bspc node -z right -$delta 0; bspc node -z left +$delta 0, bspc node -z top 0 -$delta; bspc node -z bottom 0 +$delta, bspc node -z top 0 +$delta; bspc node -z bottom 0 -$delta, bspc node -z right +$delta 0; bspc node -z left -$delta 0 }
-# bspwm_resize {left,down,up,right} 50
+  bspwm_resize {left,down,up,right} 50
+# delta=50; \
+# { bspc node -z right -$delta 0; bspc node -z left +$delta 0, bspc node -z top 0 -$delta; bspc node -z bottom 0 +$delta, bspc node -z top 0 +$delta; bspc node -z bottom 0 -$delta, bspc node -z right +$delta 0; bspc node -z left -$delta 0 }
 
 # move a floating window
 super + {Left,Down,Up,Right}
@@ -221,10 +225,10 @@ alt + F1
 
 # take a screenshot
 Print
-  maim -s --format png /dev/stdout | xclip -selection clipboard -t image/png -i; \
+  maim -s --format png /dev/stdout | tee ~/Pictures/Screenshots/$(date "+%y.%m.%d-%H:%M:%S").png | xclip -selection clipboard -t image/png -i; \
   notify-send -u low "Copied" "Screenshot copied to clipboard!"
 super + Print
-  maim -s ~/Pictures/Screenshots/$(date +%s).png; \
+  maim -s ~/Pictures/Screenshots/$(date "+%y.%m.%d-%H:%M:%S").png; \
   notify-send -u low "Saved" "Screenshot saved!"
 
 super + shift + Print
@@ -261,12 +265,17 @@ super + shift + w
 	fi
 
 { XF86AudioRaiseVolume, XF86AudioLowerVolume }
-  pactl set-sink-volume 0 {+,-}5%
+  change_volume {inc,dec}
+  # pactl set-sink-volume 0 {+,-}5%
 XF86AudioMute
-  pactl set-sink-mute 0 toggle
+  change_volume mute
+  # pactl set-sink-mute 0 toggle
 
 XF86MonBrightness{Up,Down}
   brightnessctl s 1920{+,-}
+
+XF86AudioPlay
+  playerctl play-pause
 
 # lock screen
 super + shift + equal
@@ -291,13 +300,13 @@ XF86Display
 {XF86HomePage, super + shift + o}
   toggle_headphones
 
-super +ctrl + Escape
+super + ctrl + Escape
   xkill
 
 XF86Calculator
   kcalc
 
-super + shift + e
+super + shift + r
   bspwm_resize_16by9
 # Super_R
 #   xdotool click 8

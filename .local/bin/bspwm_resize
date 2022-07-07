@@ -18,4 +18,3 @@ case $dim in
 esac
 
 bspc node -z "$dir" "$x" "$y" || bspc node -z "$falldir" "$x" "$y";
-notify-send $?

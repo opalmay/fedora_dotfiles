@@ -1,0 +1,6 @@
+#!/bin/sh
+
+bspc subscribe node_focus | while read event
+do
+  echo $(bspc query -T -n | jq -r '.client.state') #todo make this an icon instead
+done

@@ -1,35 +1,6 @@
-#!/bin/dash
+#!/bin/sh
 
-contains() {
-    string="$1"
-    substring="$2"
-    if test "${string#*$substring}" != "$string"
-    then
-        return 0    # $substring is in $string
-    else
-        return 1    # $substring is not in $string
-    fi
-}
-
-STATUS=$(playerctl status)
-TRACK=$(playerctl metadata title)
-# if [ "$TRACK" = "Microsoft Teams" ]; then
-#   exit
-# fi
-if [ contains "$TRACK" "Microsoft Teams" ]; then
-  exit
-fi
-TRACK=$(echo "$TRACK" | xargs | cut -d " " -f -3)
-if [ "$STATUS" = "" ] || [ "$TRACK" = "" ]; then
-  exit 
-elif [ "$STATUS" = "Playing" ]; then
-  STATUS=""
-else
-  STATUS="契"
-fi
-
-ARTIST=$(playerctl metadata artist)
-if [ -n "$ARTIST" ]; then
-  ARTIST="$ARTIST -"
-fi
-printf "%s %s %s" "$STATUS" "$ARTIST" "$TRACK"
+playerctl metadata --format '{{ status }} {{ artist }} - {{ title }}' --follow | while read line
+do
+  echo "$line" | sed 's/Playing//' | sed 's/Paused/契/' | cut -d " " -f -7
+done
