@@ -1,0 +1,4 @@
+#!/bin/sh
+amixer set Capture toggle | grep -q '\[off\]' &&
+  notify-send.py "Microphone Off" --replaces-process "toggle_mic" ||
+  notify-send.py "Microphone On" --replaces-process "toggle_mic"

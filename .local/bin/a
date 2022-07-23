@@ -1,0 +1,8 @@
+#!/bin/sh
+# for path in @north @north/north @south @south/south; do
+#     parentnode=$(bspc query -N $window -n $path)
+#     bspc node $parentnode -B
+# done
+for wid in $(bspc query -N -d -n .window); do
+	bspc node "${wid}#@north" -B
+done

@@ -8,7 +8,7 @@ super + Escape
 #
 
 super + shift + Home
-  notify-send suspending... && systemctl suspend
+  notify-send suspending... && sleep 1 && systemctl suspend
 
 # quit/restart bspwm
 super + shift + ctrl + r
@@ -45,7 +45,7 @@ super + 0
   bsp-layout once tall
 
 super + t
-  bsp-layout once tall
+  bspc desktop -l next
   # bspc desktop -l next
   # bsp-layout set tiled
 super + y
@@ -66,11 +66,17 @@ super + g
 super + f
 	bspc node -t \~fullscreen
 
-super + shift + f
-  for node_i in $(bspc query -N -n '.!focused.window' -d focused);  \
-	do \
-	bspc node $node_i -g hidden; \
-	done
+super + shift + t
+  bspwm_toggle_padding
+
+super + shift + e
+  bspwm_move_to_empty
+
+# super + shift + f
+#   for node_i in $(bspc query -N -n '.!focused.window' -d focused);  \
+# 	do \
+# 	bspc node $node_i -g hidden; \
+# 	done
 
 # super + e
 #   bspc node focused -t tiled
@@ -111,8 +117,8 @@ super + shift + {h,j,k,l}
 # super + shift + {h,j,k,l}
 # 	~/.config/bspwm/bspwm_smart_move {west,south,north,east}
 # rotate tree
-super + shift + {d,a}
-	bspc node @/ -C {forward,backward}
+# super + shift + {d,a}
+# 	bspc node @/ -C {forward,backward}
 # change tiling direction for focused window relative to parent
 super + backslash
 	bspc node @parent -R 90
@@ -142,18 +148,18 @@ super + {_,ctrl + }{1-9,0}
 	bspc {desktop -f,node -d} focused:'^{1-9,10}'
 
 # use left hand for further desktops
-super + e; super + {1-6}
-  d=$(expr {1-6} + 6);\
-  bspc desktop -f focused:"^$d"
-  # bspc desktop -f focused:"^{7-10}"
+# super + e; super + {1-6}
+#   d=$(expr {1-6} + 6);\
+#   bspc desktop -f focused:"^$d"
+#   # bspc desktop -f focused:"^{7-10}"
 
 # send to desktop and follow
 super + shift + {1-9,0}
 	bspc node -d focused:'^{1-9,10}' --follow
 
-super + shift + e; super + shift + {1-6}
-  d=$(expr {1-6} + 6);\
-  bspc node -d focused:"^$d" --follow
+# super + shift + e; super + shift + {1-6}
+#   d=$(expr {1-6} + 6);\
+#   bspc node -d focused:"^$d" --follow
 
 
 # PRESELECT
@@ -174,9 +180,9 @@ super + {u,n}
 
 # expand/contract a window 
 super + ctrl + {h,j,k,l}
-  bspwm_resize {left,down,up,right} 50
-# delta=50; \
-# { bspc node -z right -$delta 0; bspc node -z left +$delta 0, bspc node -z top 0 -$delta; bspc node -z bottom 0 +$delta, bspc node -z top 0 +$delta; bspc node -z bottom 0 -$delta, bspc node -z right +$delta 0; bspc node -z left -$delta 0 }
+  delta=50; \
+  { bspc node -z right -$delta 0; bspc node -z left +$delta 0, bspc node -z top 0 -$delta; bspc node -z bottom 0 +$delta, bspc node -z top 0 +$delta; bspc node -z bottom 0 -$delta, bspc node -z right +$delta 0; bspc node -z left -$delta 0 }
+  # bspwm_resize {left,down,up,right} 50
 
 # move a floating window
 super + {Left,Down,Up,Right}
@@ -192,7 +198,8 @@ super + {ctrl, shift} + g
 
 # terminal emulator
 super + Return
-	st
+  st
+# tabbed -c -r 2 st -w ''
 
 super + shift + Return
 	bspc rule -a St state=floating -o && st
@@ -266,10 +273,8 @@ super + shift + w
 
 { XF86AudioRaiseVolume, XF86AudioLowerVolume }
   change_volume {inc,dec}
-  # pactl set-sink-volume 0 {+,-}5%
 XF86AudioMute
   change_volume mute
-  # pactl set-sink-mute 0 toggle
 
 XF86MonBrightness{Up,Down}
   brightnessctl s 1920{+,-}
@@ -310,3 +315,18 @@ super + shift + r
   bspwm_resize_16by9
 # Super_R
 #   xdotool click 8
+super + shift + m
+  samba
+#   amixer set Capture nocap
+# xset r off; \
+  # amixer get Capture | grep '\[off\]' && amixer set Capture on
+  # toggle_mic
+# super + shift + @m
+#   amixer set Capture cap
+  # xset r on; \
+  # amixer get Capture | grep '\[on\]' && toggle_mic
+  # toggle_mic
+super + shift + v
+  kill $(cat /tmp/fake) || (fake.py -w /dev/video3 -v /dev/video2 -b ~/.local/teams_backgrounds/wallpaper.png --no-foreground --no-ondemand --threshold 60 & echo $! > /tmp/fake)
+Menu
+  toggle_mic

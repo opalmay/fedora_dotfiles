@@ -153,14 +153,14 @@ return packer.startup(function(use)
   --     })
   --   end,
   -- })
-  use({
-    "phaazon/hop.nvim",
-    -- branch = "v1", -- optional but strongly recommended
-    config = function()
-      -- you can configure Hop the way you like here; see :h hop-config
-      require("hop").setup()
-    end,
-  })
+  -- use({
+  --   "phaazon/hop.nvim",
+  --   -- branch = "v1", -- optional but strongly recommended
+  --   config = function()
+  --     -- you can configure Hop the way you like here; see :h hop-config
+  --     require("hop").setup()
+  --   end,
+  -- })
   -- use("unblevable/quick-scope")
   use("RRethy/vim-illuminate")
   -- use("mg979/vim-visual-multi")

@@ -46,10 +46,10 @@
 
 [nord_normal]
     msg_urgency = normal
-    background = "#81a1c1"
+    background = "#4c566a"
     foreground = "#ECEFF4"
     
 [nord_critical]
     msg_urgency = critical
-    background = "#bf616a"
+    background = "#4c566a"
     foreground = "#ECEFF4"

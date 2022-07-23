@@ -1,0 +1,4 @@
+#!/bin/sh
+sshfs root@172.28.243.215:/ /mnt/idmlab5
+sshfs root@172.28.243.215:/var/log/idm /mnt/idmlogstest
+sudo mount -t cifs -o username=opalm,domain=nice.com //192.168.220.40/d$/Novell/IDM-Logs /mnt/idmlogs

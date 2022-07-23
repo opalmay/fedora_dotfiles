@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# For when you want shared desktops between screens
+
+desktop=$1
+
+# If desktop in this monitor, just focus it and exit
+bspc desktop -f "^$desktop" && exit 0
+
+bspc desktop -m next
+bspc desktop -d $desktop -m next

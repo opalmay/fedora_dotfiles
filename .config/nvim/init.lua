@@ -14,3 +14,9 @@ require("user.nvim-tree")
 require("user.barbar")
 require("user.lualine")
 require("user.alpha")
+
+require("lspconfig").sqls.setup({
+	on_attach = function(client, bufnr)
+		require("sqls").on_attach(client, bufnr)
+	end,
+})

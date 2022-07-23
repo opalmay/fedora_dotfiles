@@ -1,0 +1,17 @@
+#!/bin/sh
+
+pad=$(bspc config right_padding)
+
+if [ $pad -eq 0 ]; then
+  bspc config right_padding 477
+  bspc config left_padding 478
+  bspc config right_monocle_padding 0
+  bspc config left_monocle_padding 0
+  notify-send.py "Padding On" --replaces-process "padding"
+else
+  bspc config right_padding 0
+  bspc config left_padding 0
+  bspc config right_monocle_padding 477
+  bspc config left_monocle_padding 478
+  notify-send.py "Padding Off" --replaces-process "padding"
+fi

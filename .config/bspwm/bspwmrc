@@ -1,20 +1,17 @@
 #!/bin/sh
 
 # run every time bspwm restarts
-# picom -b --config ~/.config/picom.conf --experimental-backends &
-feh --bg-fill --no-fehbg ~/.local/wallpaper2.png &
 killall deadd-notification-center; deadd-notification-center &
 
 #run once
 startup_lock_file=/tmp/bspwm-startup.lock
 if [ ! -f $startup_lock_file ]; then
   touch $startup_lock_file
-  killall pasystray
-  killall blueman-applet
   mkdir /tmp/opal
   # latte-dock &
   setxkbmap -option caps:escape &
-  tint2 &
+  # (sleep 1 && tint2) &
+  (sleep 3 && tint2) &
 	autorandr --change &
   bspm -d &
   sxhkd &
@@ -22,9 +19,9 @@ if [ ! -f $startup_lock_file ]; then
   /usr/libexec/polkit-gnome-authentication-agent-1 &
   xrdb ~/.config/x11/xresources &
 	numlockx on &
-  nm-applet --indicator &
+  (sleep 1 && nm-applet --indicator) &
+  (sleep 1 && pasystray) &
 	blueman-applet &
-  pasystray &
 	ksuperkey &
   # easystroke &
   # bspi_listen --config ~/.config/bspwm/bspi.ini &
@@ -38,32 +35,41 @@ if [ ! -f $startup_lock_file ]; then
   playerctld daemon &
   spotblock &
   alttab -bg "#3B4252" -fg "#ECEFF4" -frame "#597AA0" -font "xft:JetBrains Mono Nerd Font Mono-10" -t 250x140 -i 250x64 -theme "Papirus-dark" -w 1 -mk Super_L &
-  # xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" $(xdo id -n tint2)
 fi
 
 
 monitors=$(bspc query -M)
 while read monitor; do
-  bspc monitor "$monitor" -d 1 2 3 4 5 6 7 8 9 10 11 12
+  bspc monitor "$monitor" -d 1 2 3 4 5 6 7 8 9 10
 done <<< "$monitors"
 
 bspc config remove_unplugged_monitors     false
 bspc config remove_disabled_monitors      false
 
+xrandr --delmonitor VIRT
+feh --bg-fill --no-fehbg ~/.local/wallpaper2.png
 if [[ -z $(bspc query -M --names | grep -w DP-1) ]]; then
+  bspc config right_monocle_padding 0
+  bspc config left_monocle_padding 0
   # Set all to monocle
   bspc query -D | xargs -I {} bspc desktop {} -l monocle
   pidof xscreensaver || xscreensaver --no-splash &
 else
+  xrandr --setmonitor VIRT 2457/2457x1382/0+492+44 DP-2
+  bspc config right_monocle_padding 477
+  bspc config left_monocle_padding 478
   # Set all to tiling
   bspc query -D | xargs -I {} bspc desktop {} -l tiled
   killall xscreensaver
 fi
+# picom -b --config ~/.config/picom.conf --experimental-backends &
 bspc config window_gap                    10
 # bspc config -m DP-1 window_gap            15
+# bspc query -D -m | xargs -I {} bspc desktop {} -l monocle
+# bspc query -D -m DP-1 | xargs -I {} bspc desktop {} -l tiled
 
 bspc config external_rules_command ~/.local/bin/bspwm_external_rules
-bspc config single_monocle false
+bspc config single_monocle true
 bspc config border_width                  4
 bspc config top_padding                   26
 bspc config bottom_padding                0

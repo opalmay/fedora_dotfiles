@@ -21,13 +21,15 @@ Places Icons Auto-resize=false
 Places Icons Static Size=32
 
 [KPropertiesDialog]
+DP-1 Height 3440x1440=680
+DP-1 Width 3440x1440=1000
 DP-1 eDP-1 HDMI-1 Height 3440x1440=680
 DP-1 eDP-1 HDMI-1 Width 3440x1440=1000
 DP-1 eDP-1 Height 3440x1440=680
 DP-1 eDP-1 Width 3440x1440=1000
-DP-2-1 DP-2-3 Height 1680x1050=601
+DP-2-1 DP-2-3 Height 1680x1050=680
 DP-2-1 DP-2-3 Height 1920x1080=601
-DP-2-1 DP-2-3 Width 1680x1050=545
+DP-2-1 DP-2-3 Width 1680x1050=1000
 DP-2-1 DP-2-3 Width 1920x1080=545
 
 [MainWindow]
@@ -123,10 +125,17 @@ eDP-1 YPosition 1920x1080=40
 
 [Open-with settings]
 CompletionMode=1
-History=vim,ark
+History=neov,neo,vim,ark
 
 [PlacesPanel]
 IconSize=32
 
 [PreviewSettings]
 Plugins=audiothumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,svgthumbnail
+
+[Search]
+Location=Everywhere
+
+[ViewPropertiesDialog]
+DP-1 eDP-1 Height 3440x1440=649
+DP-1 eDP-1 Width 3440x1440=441

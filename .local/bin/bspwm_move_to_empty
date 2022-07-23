@@ -1,0 +1,6 @@
+#!/bin/sh
+
+desktops=$(bspc query -D -m --names)
+while read desktop; do
+  bspc query -N -d $desktop || (bspc node -d focused:"^$desktop" --follow && killall bspwm_move_to_empty)
+done <<< $desktops

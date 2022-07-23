@@ -7,6 +7,8 @@ setopt autocd		# Automatically cd into typed directory.
 stty stop undef		# Disable ctrl-s to freeze terminal.
 setopt interactive_comments
 
+zle_highlight+=(paste:none) # Disable paste highlight
+
 # History in cache directory:
 HISTSIZE=10000000
 SAVEHIST=10000000
@@ -70,6 +72,13 @@ bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
 
 bindkey '^[[P' delete-char
 
+st() { command st "${XEMBED:+-w "$XEMBED"}" -e zsh -is eval "cd $PWD" & disown; }
+bindkey -s '^T' 'st\n'
+# bindkey -s '^T' 'st &> /dev/null & disown\n'
+
+dockerstop() { sudo docker stop $(sudo docker ps -q); }
+dockerstart() { sudo docker start $(sudo docker ps -qa); }
+
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
@@ -105,3 +114,4 @@ then
 set --
 fi
 # precmd () {print -Pn "\e]0;%~\a"}
+

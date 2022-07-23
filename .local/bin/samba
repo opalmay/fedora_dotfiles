@@ -1,0 +1,8 @@
+#!/bin/sh
+
+SERVER=$(kdialog --inputbox "Server:") || exit
+DRIVE=$(kdialog --inputbox "Drive:" "c") || DRIVE=c
+SERVER_TRIMMED=$(echo $SERVER | cut -d"." -f1)
+# echo $SERVER | grep -i "na.nice.com" && USER=dirxmlna
+mkdir /mnt/$SERVER_TRIMMED
+pkexec mount -t cifs -o username=dirxmlil,password=!DMN0v3ll,domain=nice.com //$SERVER/$DRIVE$ /mnt/$SERVER_TRIMMED 2>&1 | xargs -I {} notify-send.py "{}"

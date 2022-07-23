@@ -1,0 +1,21 @@
+#!/bin/sh
+printdesks(){
+    printf '%s\n' "$*"
+    for mon in $(bspc query -M --names); do
+        printf '\t%s: %s\n' "$mon" "$(bspc query -D -m "$mon" --names | xargs)"
+    done
+}
+reorderdesks(){
+    while [ -n "$1" ]; do
+        desks="$(bspc query --desktops --monitor "$1" --names | sort | xargs)"
+        [ -n "$desks" ] &&
+            bspc monitor "$1" -o $desks ||
+            printf 'reorder failed on monitor %s with desks: %s\n' "$1" "$desks" >&2
+        shift
+    done
+}
+bspc subscribe desktop_transfer | while read -r _ smon _ dmon; do
+    printdesks "desk transfered, order before sort:"
+    reorderdesks "$smon" "$dmon"
+    printdesks "reorder attempted, new order:"
+done
